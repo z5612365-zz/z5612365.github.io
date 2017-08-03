@@ -1,0 +1,688 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="使用套件 nginx-rtmp-module ffmpeg dash.js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx-rtmp-module實現mpeg-dash流直播服務">
+<meta property="og:url" content="http://z5612365.github.io/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務/index.html">
+<meta property="og:site_name" content="ychichiy">
+<meta property="og:description" content="使用套件 nginx-rtmp-module ffmpeg dash.js">
+<meta property="og:updated_time" content="2017-08-03T20:13:12.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="nginx-rtmp-module實現mpeg-dash流直播服務">
+<meta name="twitter:description" content="使用套件 nginx-rtmp-module ffmpeg dash.js">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://z5612365.github.io/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務/"/>
+
+
+
+
+
+  <title>nginx-rtmp-module實現mpeg-dash流直播服務 | ychichiy</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ychichiy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ychichiy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">nginx-rtmp-module實現mpeg-dash流直播服務</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-04T04:00:28+08:00">
+                2017-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="使用套件"><a href="#使用套件" class="headerlink" title="使用套件"></a>使用套件</h3><ol>
+<li><a href="https://github.com/arut/nginx-rtmp-module" target="_blank" rel="external">nginx-rtmp-module</a></li>
+<li><a href="https://github.com/FFmpeg/FFmpeg" target="_blank" rel="external">ffmpeg</a></li>
+<li><a href="https://github.com/Dash-Industry-Forum/dash.js" target="_blank" rel="external">dash.js</a></li>
+</ol>
+<a id="more"></a>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><h2 id="安裝nginx-rtmp-module"><a href="#安裝nginx-rtmp-module" class="headerlink" title="安裝nginx-rtmp-module"></a>安裝nginx-rtmp-module</h2><p><a href="https://github.com/arut/nginx-rtmp-module/wiki/Installing-via-Build" target="_blank" rel="external">https://github.com/arut/nginx-rtmp-module/wiki/Installing-via-Build</a><br>nginx-rtmp-module安裝官方寫的很清楚，這邊就不再贅述。<br>git clone下來compile且安裝完，接下來就是config的配置。</p>
+<h3 id="nginx-rtmp-module-config配置"><a href="#nginx-rtmp-module-config配置" class="headerlink" title="nginx-rtmp-module config配置"></a>nginx-rtmp-module config配置</h3><p>簡單的配置可以參考<a href="https://github.com/arut/nginx-rtmp-module/wiki/Examples" target="_blank" rel="external">官方doc</a><br>主要設定檔位於<code>/usr/local/nginx/conf/nginx.conf</code></p>
+<p>以下是我的配置nginx.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">#user  nobody;</div><div class="line">worker_processes  1;</div><div class="line"></div><div class="line">error_log  logs/error.log debug;</div><div class="line"></div><div class="line">events &#123;</div><div class="line">    worker_connections  1024;</div><div class="line">&#125;</div><div class="line">rtmp &#123;</div><div class="line">    server &#123;</div><div class="line">        listen 1935;</div><div class="line"></div><div class="line">        application myapp &#123;</div><div class="line">            live on;</div><div class="line">            dash on;</div><div class="line">            dash_path /tmp/dash;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">http &#123;</div><div class="line">    server &#123;  </div><div class="line">        listen 8080;</div><div class="line"></div><div class="line">        location /dash &#123;</div><div class="line">            root /tmp;</div><div class="line">            add_header Cache-Control no-cache;</div><div class="line">        add_header &apos;Access-Control-Allow-Origin&apos; &apos;*&apos;;</div><div class="line">        &#125;</div><div class="line">         location /dash.js &#123;</div><div class="line">           root /home/;</div><div class="line"></div><div class="line">          &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>關閉/開啟nginx<br><code>sudo /usr/local/nginx/sbin/nginx -s stop</code><br><code>sudo /usr/local/nginx/sbin/nginx</code></p>
+<h2 id="影片轉換mpeg-dash流並推播"><a href="#影片轉換mpeg-dash流並推播" class="headerlink" title="影片轉換mpeg-dash流並推播"></a>影片轉換mpeg-dash流並推播</h2><p>安裝ffmpeg套件<br><code>sudo apt-get install ffmpeg</code><br>mp4轉成mpeg-dash流並推播到rtmp://localhost/myapp/mystream<br><code>ffmpeg -re -i [video_path].mp4 -c copy -f flv rtmp://localhost/myapp/mystream</code></p>
+<h2 id="網頁接收mpeg-dash流畫面"><a href="#網頁接收mpeg-dash流畫面" class="headerlink" title="網頁接收mpeg-dash流畫面"></a>網頁接收mpeg-dash流畫面</h2><p>根據上面config的設定，我們nginx有兩個輸出方式rtmp、http，所以我們可以透過這兩個方式來接收。</p>
+<h3 id="rtmp-demo"><a href="#rtmp-demo" class="headerlink" title="rtmp demo:"></a>rtmp demo:</h3><p>ffplay是ffmpeg裡的一個播放器，可以用他來接收rtmp流來做簡單的測試。<br><code>ffplay rtmp://localhost/myapp/mystream</code></p>
+<h3 id="http-demo"><a href="#http-demo" class="headerlink" title="http demo:"></a>http demo:</h3><p>如果我們想要以網頁呈現就要走http protocol了</p>
+<ol>
+<li>網頁端import dash.js</li>
+<li>接收目標http url串流來呈現 (<code>http://localhost:8080/dash/mystream.mpd</code>)</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;script src=&quot;https://cdn.dashjs.org/latest/dash.all.min.js&quot;&gt;&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">    video &#123;</div><div class="line">       width: 640px;</div><div class="line">       height: 360px;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div><div class="line"></div><div class="line">&lt;body&gt;</div><div class="line">   &lt;div&gt;</div><div class="line">       &lt;video data-dashjs-player autoplay src=&quot;http://localhost:8080/dash/mystream.mpd&quot; controls&gt;&lt;/video&gt;</div><div class="line">   &lt;/div&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
+<p>demo <code>http://localhost:[port]/[file_path].html</code></p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ol>
+<li><a href="http://blog.csdn.net/u011432426/article/details/54730581" target="_blank" rel="external">http://blog.csdn.net/u011432426/article/details/54730581</a></li>
+<li><a href="https://streamroot.readme.io/v1.8/docs/nginx-rtmp" target="_blank" rel="external">https://streamroot.readme.io/v1.8/docs/nginx-rtmp</a></li>
+<li>Enable CORS <a href="https://streamroot.readme.io/v1.8/docs/nginx-http" target="_blank" rel="external">https://streamroot.readme.io/v1.8/docs/nginx-http</a></li>
+<li>Nice Youtube Video <a href="http://livestreamninja.com/live-streaming-with-nginx-and-ffmpeg/" target="_blank" rel="external">http://livestreamninja.com/live-streaming-with-nginx-and-ffmpeg/</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/05/dead/" rel="next" title="dead">
+                <i class="fa fa-chevron-left"></i> dead
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="Chi" />
+          <p class="site-author-name" itemprop="name">Chi</p>
+           
+              <p class="site-description motion-element" itemprop="description">Chi's Blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用套件"><span class="nav-number">1.</span> <span class="nav-text">使用套件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number"></span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安裝nginx-rtmp-module"><span class="nav-number"></span> <span class="nav-text">安裝nginx-rtmp-module</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nginx-rtmp-module-config配置"><span class="nav-number">1.</span> <span class="nav-text">nginx-rtmp-module config配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#影片轉換mpeg-dash流並推播"><span class="nav-number"></span> <span class="nav-text">影片轉換mpeg-dash流並推播</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#網頁接收mpeg-dash流畫面"><span class="nav-number"></span> <span class="nav-text">網頁接收mpeg-dash流畫面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rtmp-demo"><span class="nav-number">1.</span> <span class="nav-text">rtmp demo:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http-demo"><span class="nav-number">2.</span> <span class="nav-text">http demo:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考"><span class="nav-number"></span> <span class="nav-text">參考</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chi</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
