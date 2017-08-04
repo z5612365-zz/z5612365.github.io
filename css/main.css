@@ -1,3 +1,17 @@
+/*defalte
+$main-desktop                   = 960px
+$main-desktop-large             = 1200px
+
+$content-desktop                = 700px
+$content-desktop-large          = 900px
+$content-desktop-padding        = 40px
+
+$sidebar-desktop                = 240px
+
+$footer-height                  = 50px
+
+$gap-between-main-and-footer    = 100px
+*/
 /* normalize.css v3.0.2 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif; /* 1 */
@@ -434,11 +448,11 @@ body {
 .header-inner {
   margin: 0 auto;
   padding: 100px 0 70px;
-  width: 700px;
+  width: 82%;
 }
 @media (min-width: 1600px) {
   .container .header-inner {
-    width: 900px;
+    width: 82%;
   }
 }
 .main {
@@ -446,11 +460,11 @@ body {
 }
 .main-inner {
   margin: 0 auto;
-  width: 700px;
+  width: 82%;
 }
 @media (min-width: 1600px) {
   .container .main-inner {
-    width: 900px;
+    width: 82%;
   }
 }
 .footer {
@@ -463,11 +477,11 @@ body {
 .footer-inner {
   box-sizing: border-box;
   margin: 20px auto;
-  width: 700px;
+  width: 82%;
 }
 @media (min-width: 1600px) {
   .container .footer-inner {
-    width: 900px;
+    width: 82%;
   }
 }
 pre,
@@ -475,9 +489,9 @@ pre,
   overflow: auto;
   margin: 20px 0;
   padding: 0;
-  font-size: 13px;
-  color: #4d4d4c;
-  background: #f7f7f7;
+  font-size: 18px;
+  color: #ccc;
+  background: #2d2d2d;
   line-height: 1.6;
 }
 pre,
@@ -490,11 +504,11 @@ code {
   color: #555;
   background: #eee;
   border-radius: 3px;
-  font-size: 13px;
+  font-size: 18px;
 }
 pre code {
   padding: 0;
-  color: #4d4d4c;
+  color: #ccc;
   background: none;
   text-shadow: none;
 }
@@ -517,7 +531,7 @@ pre code {
 }
 .highlight figcaption {
   font-size: 1em;
-  color: #4d4d4c;
+  color: #ccc;
   line-height: 1em;
   margin-bottom: 1em;
 }
@@ -531,23 +545,23 @@ pre code {
 }
 .highlight figcaption a {
   float: right;
-  color: #4d4d4c;
+  color: #ccc;
 }
 .highlight figcaption a:hover {
-  border-bottom-color: #4d4d4c;
+  border-bottom-color: #ccc;
 }
 .highlight .gutter pre {
   padding-left: 10px;
   padding-right: 10px;
-  color: #869194;
+  color: #999;
   text-align: right;
-  background-color: #eff2f3;
+  background-color: #1b1b1b;
 }
 .highlight .code pre {
   width: 100%;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #f7f7f7;
+  background-color: #2d2d2d;
 }
 .highlight .line {
   height: 20px;
@@ -565,16 +579,16 @@ pre code {
   border: none;
 }
 pre .deletion {
-  background: #fdd;
+  background: #008000;
 }
 pre .addition {
-  background: #dfd;
+  background: #800000;
 }
 pre .meta {
-  color: #8959a8;
+  color: #c9c;
 }
 pre .comment {
-  color: #8e908c;
+  color: #999;
 }
 pre .variable,
 pre .attribute,
@@ -588,7 +602,7 @@ pre .html .doctype,
 pre .css .id,
 pre .css .class,
 pre .css .pseudo {
-  color: #c82829;
+  color: #f2777a;
 }
 pre .number,
 pre .preprocessor,
@@ -597,7 +611,7 @@ pre .literal,
 pre .params,
 pre .constant,
 pre .command {
-  color: #f5871f;
+  color: #f99157;
 }
 pre .ruby .class .title,
 pre .css .rules .attribute,
@@ -610,11 +624,11 @@ pre .xml .cdata,
 pre .special,
 pre .number,
 pre .formula {
-  color: #718c00;
+  color: #9c9;
 }
 pre .title,
 pre .css .hexcolor {
-  color: #3e999f;
+  color: #6cc;
 }
 pre .function,
 pre .python .decorator,
@@ -624,11 +638,11 @@ pre .ruby .title .keyword,
 pre .perl .sub,
 pre .javascript .title,
 pre .coffeescript .title {
-  color: #4271ae;
+  color: #69c;
 }
 pre .keyword,
 pre .javascript .function {
-  color: #8959a8;
+  color: #c9c;
 }
 .full-image.full-image.full-image {
   border: none;
@@ -997,7 +1011,7 @@ pre .javascript .function {
   display: inline-block;
   vertical-align: top;
   line-height: 36px;
-  font-size: 20px;
+  font-size: 40px;
   font-weight: normal;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
@@ -1696,7 +1710,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #7f74b8;
+  background: #e244ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2484,7 +2498,7 @@ pre .javascript .function {
 .header {
   position: relative;
   margin: 0 auto;
-  width: 960px;
+  width: 80%;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .header {
@@ -2544,7 +2558,7 @@ pre .javascript .function {
   }
 }
 .container .main-inner {
-  width: 960px;
+  width: 80%;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .container .main-inner {
@@ -2560,7 +2574,7 @@ pre .javascript .function {
   float: right;
   box-sizing: border-box;
   padding: 40px;
-  width: 700px;
+  width: 82%;
   background: #fff;
   min-height: 700px;
   box-shadow: initial;
@@ -2603,7 +2617,7 @@ pre .javascript .function {
   display: none;
 }
 .footer-inner {
-  width: 960px;
+  width: 80%;
   padding-left: 260px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
