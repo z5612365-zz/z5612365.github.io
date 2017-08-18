@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Firebase," />
+  <meta name="keywords" content="Maya," />
 
 
 
@@ -88,17 +88,19 @@
 
 
 
-<meta name="description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
-<meta name="keywords" content="Firebase">
+<meta name="description" content="前言Python要調用C++ module可以透過SWIG, boost.python, SIP, Shiboken…etc.又Qt是由C++編寫成的，所以PyQT以及PySide要連接QT當然是透過上面的Library來實現囉！目前而言，PyQT選擇的是SIP，PySide選擇的是Shiboken。 如果不想搞太複雜，上述的基本觀念記住就好！">
+<meta name="keywords" content="Maya">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Firebase開發（一）">
-<meta property="og:url" content="http://z5612365.github.io/2017/08/07/Firebase開發（一）/index.html">
+<meta property="og:title" content="PyQt vs PySide">
+<meta property="og:url" content="http://z5612365.github.io/2017/08/16/PyQT-vs-PySide/index.html">
 <meta property="og:site_name" content="ychichiy">
-<meta property="og:description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
-<meta property="og:updated_time" content="2017-08-09T17:04:14.355Z">
+<meta property="og:description" content="前言Python要調用C++ module可以透過SWIG, boost.python, SIP, Shiboken…etc.又Qt是由C++編寫成的，所以PyQT以及PySide要連接QT當然是透過上面的Library來實現囉！目前而言，PyQT選擇的是SIP，PySide選擇的是Shiboken。 如果不想搞太複雜，上述的基本觀念記住就好！">
+<meta property="og:image" content="https://qt-wiki-uploads.s3.amazonaws.com/images/3/32/Binding_Generator_Architecture.png">
+<meta property="og:updated_time" content="2017-08-16T17:17:55.499Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Firebase開發（一）">
-<meta name="twitter:description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
+<meta name="twitter:title" content="PyQt vs PySide">
+<meta name="twitter:description" content="前言Python要調用C++ module可以透過SWIG, boost.python, SIP, Shiboken…etc.又Qt是由C++編寫成的，所以PyQT以及PySide要連接QT當然是透過上面的Library來實現囉！目前而言，PyQT選擇的是SIP，PySide選擇的是Shiboken。 如果不想搞太複雜，上述的基本觀念記住就好！">
+<meta name="twitter:image" content="https://qt-wiki-uploads.s3.amazonaws.com/images/3/32/Binding_Generator_Architecture.png">
 
 
 
@@ -126,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://z5612365.github.io/2017/08/07/Firebase開發（一）/"/>
+  <link rel="canonical" href="http://z5612365.github.io/2017/08/16/PyQT-vs-PySide/"/>
 
 
 
 
 
-  <title>Firebase開發（一） | ychichiy</title>
+  <title>PyQt vs PySide | ychichiy</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -261,7 +263,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/07/Firebase開發（一）/">
+    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/16/PyQT-vs-PySide/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chi">
@@ -278,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Firebase開發（一）</h1>
+          <h1 class="post-title" itemprop="name headline">PyQt vs PySide</h1>
         
 
         <div class="post-meta">
@@ -290,8 +292,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-07T01:40:37+08:00">
-                2017-08-07
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-16T23:16:24+08:00">
+                2017-08-16
               </time>
             
 
@@ -309,9 +311,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/07/Firebase開發（一）/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/16/PyQT-vs-PySide/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/07/Firebase開發（一）/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/16/PyQT-vs-PySide/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -336,16 +338,33 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><span style="color:red">本章節介紹基礎的Firebase Database使用。</span><br>Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。</p>
-<a id="more"></a>
-<p>能夠省去開發的大量時間，支援Android/iOS/Web的app。</p>
-<h1 id="使用套件"><a href="#使用套件" class="headerlink" title="使用套件"></a>使用套件</h1><ol>
-<li><a href="https://firebase.google.com/" target="_blank" rel="external">firebase</a></li>
-<li><a href="https://github.com/firebase/firebase-import" target="_blank" rel="external">firebase-import</a></li>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Python要調用C++ module可以透過SWIG, boost.python, SIP, Shiboken…etc.<br>又Qt是由C++編寫成的，所以PyQT以及PySide要連接QT當然是透過上面的Library來實現囉！<br><span style="color:red">目前而言，PyQT選擇的是SIP，PySide選擇的是Shiboken。</span></p>
+<p>如果不想搞太複雜，上述的基本觀念記住就好！<br><a id="more"></a></p>
+<h1 id="PyQT-SIP"><a href="#PyQT-SIP" class="headerlink" title="PyQT SIP"></a>PyQT SIP</h1><p>根據SIP官方的定義<br><a href="https://riverbankcomputing.com/software/sip/intro" target="_blank" rel="external">https://riverbankcomputing.com/software/sip/intro</a></p>
+<blockquote>
+<p>SIP is a tool that makes it very easy to create Python bindings for C and C++ libraries. It was originally developed to create PyQt, the Python bindings for the Qt toolkit, but can be used to create bindings for any C or C++ library.</p>
+</blockquote>
+<p>簡單來說SIP一開始是為了PyQT綁定QT而被Riverbank Computing公司開發出來的工具，不過演變到現在SIP不限定再使用於PyQT，任何C or C++ library都可以透過SIP來讓Python使用。</p>
+<h1 id="PySide-Shiboken"><a href="#PySide-Shiboken" class="headerlink" title="PySide Shiboken"></a>PySide Shiboken</h1><p>根據wiki.qt.io的解釋<br><a href="https://wiki.qt.io/PySide_Shiboken" target="_blank" rel="external">https://wiki.qt.io/PySide_Shiboken</a></p>
+<blockquote>
+<p>Shiboken is a plugin (front-end) for Generator Runner. It generates bindings for C++ libraries using CPython source code.</p>
+</blockquote>
+<p>那Generator Runner又是什麼呢？<br><a href="https://wiki.qt.io/PySide_Binding_Generator" target="_blank" rel="external">https://wiki.qt.io/PySide_Binding_Generator</a></p>
+<blockquote>
+<p>The Generator Runner application is responsible for instantiating the API Extractor to parse the headers and binding information from the typesystem files, after that it will load and call the generator front-ends indicated by the user.</p>
+<p>The Binding Generator Architecture is illustrated in the figure below.</p>
+</blockquote>
+<p>Generator Runner是能夠讓開發者方便為C++和Qt擴展其他特定語言的工具。</p>
+<p><img src="https://qt-wiki-uploads.s3.amazonaws.com/images/3/32/Binding_Generator_Architecture.png" alt="Binding Generator Architecture.png"></p>
+<p>可以看的出來Generator Runner介於Api Extractor和front-end之間，Api Extractor先parse header files還有綁定typesystem files的資訊，然後透過Generator Runner綁定前端，來達成特定語言的擴展，這裡的前端就是Shiboken，特定語言就是Python(PySide)。</p>
+<h1 id="PyQt-vs-PySide"><a href="#PyQt-vs-PySide" class="headerlink" title="PyQt vs PySide"></a>PyQt vs PySide</h1><p>兩者使用的架構來說大致相同，更重要的差異在於授權。<br><span style="color:OrangeRed ">PySide is LGPL while PyQt is GPL.</span><br>而LGPL授權允許二次開發後做閉源商業銷售，GPL授權若是要商業化，就需要將開發後的程式碼也做開源，並且繼承GPL協議。</p>
+<!--more-->
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ol>
+<li><p>Shiboken学习小结<br><a href="http://blog.csdn.net/dbzhang800/article/details/6386918" target="_blank" rel="external">http://blog.csdn.net/dbzhang800/article/details/6386918</a></p>
+</li>
+<li><p>PyQt or PySide - which one to use<br><a href="https://stackoverflow.com/a/6906509" target="_blank" rel="external">https://stackoverflow.com/a/6906509</a></p>
+</li>
 </ol>
-<h1 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h1><p>import data</p>
-<p>Get data</p>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://firebase.google.com/" target="_blank" rel="external">https://firebase.google.com/</a><br><a href="https://dotblogs.com.tw/leo_codespace/2017/01/04/230531" target="_blank" rel="external">https://dotblogs.com.tw/leo_codespace/2017/01/04/230531</a></p>
 
       
     </div>
@@ -375,7 +394,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Firebase/" rel="tag"># Firebase</a>
+            <a href="/tags/Maya/" rel="tag"># Maya</a>
           
         </div>
       
@@ -388,8 +407,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務（一）/" rel="next" title="nginx-rtmp-module實現mpeg-dash流直播服務（一）">
-                <i class="fa fa-chevron-left"></i> nginx-rtmp-module實現mpeg-dash流直播服務（一）
+              <a href="/2017/08/16/Build-Maya-plugin-with-PySide2（一）/" rel="next" title="Build Maya plugin with PySide2（一）">
+                <i class="fa fa-chevron-left"></i> Build Maya plugin with PySide2（一）
               </a>
             
           </div>
@@ -398,8 +417,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/14/Python-control-Maya-Layer-Editor/" rel="prev" title="Python control Maya Layer Editor">
-                Python control Maya Layer Editor <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/17/What-is-Render-Farm/" rel="prev" title="What is Render Farm">
+                What is Render Farm <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -546,7 +565,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用套件"><span class="nav-number">2.</span> <span class="nav-text">使用套件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Database"><span class="nav-number">3.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQT-SIP"><span class="nav-number">2.</span> <span class="nav-text">PyQT SIP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PySide-Shiboken"><span class="nav-number">3.</span> <span class="nav-text">PySide Shiboken</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PyQt-vs-PySide"><span class="nav-number">4.</span> <span class="nav-text">PyQt vs PySide</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">5.</span> <span class="nav-text">參考</span></a></li></ol></div>
             
 
           </div>
@@ -685,9 +704,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://z5612365.github.io/2017/08/07/Firebase開發（一）/';
-          this.page.identifier = '2017/08/07/Firebase開發（一）/';
-          this.page.title = 'Firebase開發（一）';
+          this.page.url = 'http://z5612365.github.io/2017/08/16/PyQT-vs-PySide/';
+          this.page.identifier = '2017/08/16/PyQT-vs-PySide/';
+          this.page.title = 'PyQt vs PySide';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://ychichiy.disqus.com/embed.js';

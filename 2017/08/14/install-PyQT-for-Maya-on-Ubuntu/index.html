@@ -1,0 +1,764 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Maya," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言如果是一般要直接安裝PyQt到Python裏面的話，可以直接參考官方的流程PyQt 4.12.1 Installing Guide不過如果是要安裝PyQt到Maya的Python可以參考下面的安裝步驟。">
+<meta name="keywords" content="Maya">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Install PyQT for Maya(on Ubuntu)">
+<meta property="og:url" content="http://z5612365.github.io/2017/08/14/install-PyQT-for-Maya-on-Ubuntu/index.html">
+<meta property="og:site_name" content="ychichiy">
+<meta property="og:description" content="前言如果是一般要直接安裝PyQt到Python裏面的話，可以直接參考官方的流程PyQt 4.12.1 Installing Guide不過如果是要安裝PyQt到Maya的Python可以參考下面的安裝步驟。">
+<meta property="og:updated_time" content="2017-08-16T17:17:41.940Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Install PyQT for Maya(on Ubuntu)">
+<meta name="twitter:description" content="前言如果是一般要直接安裝PyQt到Python裏面的話，可以直接參考官方的流程PyQt 4.12.1 Installing Guide不過如果是要安裝PyQt到Maya的Python可以參考下面的安裝步驟。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://z5612365.github.io/2017/08/14/install-PyQT-for-Maya-on-Ubuntu/"/>
+
+
+
+
+
+  <title>Install PyQT for Maya(on Ubuntu) | ychichiy</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-104101762-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ychichiy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/14/install-PyQT-for-Maya-on-Ubuntu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/9198887?v=4&u=b6a6cc256894fc3d4631148039900fc7370481bf&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ychichiy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Install PyQT for Maya(on Ubuntu)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-14T16:39:13+08:00">
+                2017-08-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/14/install-PyQT-for-Maya-on-Ubuntu/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/14/install-PyQT-for-Maya-on-Ubuntu/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>如果是一般要直接安裝PyQt到Python裏面的話，可以直接參考官方的流程<br><a href="http://pyqt.sourceforge.net/Docs/PyQt4/installation.html" target="_blank" rel="external">PyQt 4.12.1 Installing Guide</a><br>不過如果是要安裝PyQt到Maya的Python可以參考下面的安裝步驟。<br><a id="more"></a></p>
+<p>題外話，其實不一定要用PyQt來開發，Maya內建的PySide2也可以，也不用另外安裝PyQt就可以直接用了。<br>PyQt和PySide的差別可以看 <a href="/2017/08/16/PyQT-vs-PySide/" title="這篇文章">這篇文章</a></p>
+<h2 id="PyQt"><a href="#PyQt" class="headerlink" title="PyQt"></a>PyQt</h2><p>根據官網上的說明</p>
+<blockquote>
+<p>PyQt is a set of Python v2 and v3 bindings for The Qt Company’s Qt application framework and runs on all platforms supported by Qt including Windows, OS X, Linux, iOS and Android.</p>
+</blockquote>
+<p>PyQt只是一個binding QT的工具，所以本身並不包含Qt的framework，所以一開始我們需要先安裝Qt。</p>
+<h2 id="SIP"><a href="#SIP" class="headerlink" title="SIP"></a>SIP</h2><p>官網</p>
+<blockquote>
+<p>SIP is a tool that makes it very easy to create Python bindings for C and C++ libraries. It was originally developed to create PyQt, the Python bindings for the Qt toolkit, but can be used to create bindings for any C or C++ library.</p>
+</blockquote>
+<p>wiki</p>
+<blockquote>
+<p>SIP是一個自動為C和C++庫生成Python擴充功能模組的工具。為了方便開發PyQt，SIP於1998被「Riverbank Computing」公司創造出來。不過，SIP不專用於PyQt，而是適用於所有的C和C++庫。</p>
+</blockquote>
+<p>所以要使用PyQt前必須要先安裝SIP喔！</p>
+<h1 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h1><h2 id="Step-1"><a href="#Step-1" class="headerlink" title="Step 1"></a>Step 1</h2><p>安裝Qt。<br>至於如何安裝Qt，網路上已經有很多教學，這裡就不贅述。</p>
+<h2 id="Step-2"><a href="#Step-2" class="headerlink" title="Step 2"></a>Step 2</h2><p>安裝SIP。<br>下載<a href="https://riverbankcomputing.com/software/sip/download" target="_blank" rel="external">SIP</a>並解壓縮後<br>cd sip-4.19.3<br>‘/usr/autodesk/maya2017/bin/mayapy’ configure.py<br>make<br>sudo make install</p>
+<p>安裝SIP到Maya後，可以看到<code>/usr/autodesk/maya2017/lib/python2.7/site-packages</code>路徑下已經有SIP相關檔案。</p>
+<h2 id="Step-3"><a href="#Step-3" class="headerlink" title="Step 3"></a>Step 3</h2><p>安裝PyQt。<br>下載<a href="https://riverbankcomputing.com/software/pyqt/download" target="_blank" rel="external">PyQt</a>並解壓縮後<br>cd PyQt4_gpl_x11-4.12.1<br>‘/usr/autodesk/maya2017/bin/mayapy’ configure.py<br> /usr/lib/x86_64-linux-gnu/qt4/bin/qmake<br>make -j4<br>sudo make install</p>
+<p>如果<code>/usr/autodesk/maya2017/lib/python2.7/site-packages</code>路徑下有PyQt資料夾，就是安裝成功囉！<br>而原本用來make build的資料夾也可以刪掉了。</p>
+<h2 id="Use-PyQt4"><a href="#Use-PyQt4" class="headerlink" title="Use PyQt4 !"></a>Use PyQt4 !</h2><p>不過雖然安裝完了，我在Maya python中執行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">from PyQt4 import QtCore, QtGui</div></pre></td></tr></table></figure></p>
+<p>竟然出現</p>
+<p><code>The file being saved was created by a Student Version of Maya intended for personal learning only. If you save the file, this message will always appear whenever the file is opened.</code></p>
+<p>然後整個Maya就crash了…wtf<br>可能原因請看<a href="#The-file-being-saved-was-created-by-a-Student-Version-of-Maya-intended-for-personal-learning-only-If-you-save-the-file-this-message-will-always-appear-whenever-the-file-is-opened">這裡</a></p>
+<h1 id="Trouble-shooting"><a href="#Trouble-shooting" class="headerlink" title="Trouble shooting"></a>Trouble shooting</h1><h2 id="make-Nothing-to-be-done-for-‘first’"><a href="#make-Nothing-to-be-done-for-‘first’" class="headerlink" title="make: Nothing to be done for ‘first’"></a>make: Nothing to be done for ‘first’</h2><p>可能出現再安裝PyQt的時候，configure完要先執行qmake，這裡qmake不用輸入其他參數，如果沒有做這個步驟直接make就會出現這個error。</p>
+<h2 id="The-file-being-saved-was-created-by-a-Student-Version-of-Maya-intended-for-personal-learning-only-If-you-save-the-file-this-message-will-always-appear-whenever-the-file-is-opened"><a href="#The-file-being-saved-was-created-by-a-Student-Version-of-Maya-intended-for-personal-learning-only-If-you-save-the-file-this-message-will-always-appear-whenever-the-file-is-opened" class="headerlink" title="The file being saved was created by a Student Version of Maya intended for personal learning only. If you save the file, this message will always appear whenever the file is opened."></a>The file being saved was created by a Student Version of Maya intended for personal learning only. If you save the file, this message will always appear whenever the file is opened.</h2><p>可能因為我是教育版的Maya會有License問題，所以被Block了。<br>官方<a href="https://www.autodesk.com/company/legal-notices-trademarks/software-license-agreements" target="_blank" rel="external">autodesk software-license-agreements</a>，而這是中文版的<a href="http://download.autodesk.com/us/FY17/Suites/LSA/zh-TW/lsa.html" target="_blank" rel="external">Software License</a>。</p>
+<blockquote>
+<p>1.11 API。被授權人確認並同意，任何API資訊和開發材料 (除非經Autodesk在與該等API資訊或開發材料相關之其他條款或不同條款中另行其他載明者外) 均為：(a) 屬Autodesk機密專屬；(b) 不得散佈、揭露或以其他方式向第三人提供；(c) 僅得於內部使用，且僅得與被授權人本身對API資訊或開發材料相關之授權材料之授權內部使用一併使用或作為此目的使用，例如應用程式、模組與元件的開發和支援，以便於該等授權材料上操作或與其一併操作；且 (d) 僅得安裝於該等授權材料准許安裝之同樣電腦上。儘管有前述規定或第3條 (保留所有權利)，但若被授權人依據本合約而開發出任何該等應用程式、模組與元件時，本合約之任何內容均不禁止被授權人將該等應用程式、模組與元件和其他軟體及硬體 (包括第三人之軟硬體) 一併使用 (以及將該等應用程式、模組與元件匯至該等其他軟硬體)，但該等應用程式、模組與元件必須：(i) 不能載入或具體表達任何開發材料或其他Autodesk材料 (除非是用於按本合約對其進行開發而使用之API資訊)，且 (ii) 不能揭露API資訊。就本條第1.11條 (API) 而言，(A)「API資訊」係指Autodesk一般向授權材料之被授權人提供之標準應用程式設計介面 (「API」) 資訊，載明介面至 (例如請求或調用其功能) 該等授權材料中包含軟體之規定；和 (B)「開發材料」係指SDK和其他工具箱、資料集、程序檔、索引或範例程式碼，及授權材料中包含之類似開發商材料。API資訊不包括該等介面資訊、任何開發材料，或任何其他軟體、模組或元件之任何實施。</p>
+</blockquote>
+<p>可以改使用Maya內建的PySide2就沒問題了，不會被教育版Block，也不用另外安裝PyQt那麼麻煩。<br>直接<code>from PySide2 import QtCore</code>測試過沒問題</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="http://www.maya-python.com/2011/09/building-and-installing-pyqt/#Linux" target="_blank" rel="external">http://www.maya-python.com/2011/09/building-and-installing-pyqt/#Linux</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Maya/" rel="tag"># Maya</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/14/Python-control-Maya-Layer-Editor/" rel="next" title="Python control Maya Layer Editor">
+                <i class="fa fa-chevron-left"></i> Python control Maya Layer Editor
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/15/特效產業-Pipeline-TD/" rel="prev" title="特效產業 Pipeline TD">
+                特效產業 Pipeline TD <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/9198887?v=4&u=b6a6cc256894fc3d4631148039900fc7370481bf&s=400"
+               alt="Chi" />
+          <p class="site-author-name" itemprop="name">Chi</p>
+           
+              <p class="site-description motion-element" itemprop="description">Chi's Blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/z5612365" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/z5612365" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PyQt"><span class="nav-number">1.1.</span> <span class="nav-text">PyQt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SIP"><span class="nav-number">1.2.</span> <span class="nav-text">SIP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安裝"><span class="nav-number">2.</span> <span class="nav-text">安裝</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-1"><span class="nav-number">2.1.</span> <span class="nav-text">Step 1</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-2"><span class="nav-number">2.2.</span> <span class="nav-text">Step 2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-3"><span class="nav-number">2.3.</span> <span class="nav-text">Step 3</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-PyQt4"><span class="nav-number">2.4.</span> <span class="nav-text">Use PyQt4 !</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Trouble-shooting"><span class="nav-number">3.</span> <span class="nav-text">Trouble shooting</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#make-Nothing-to-be-done-for-‘first’"><span class="nav-number">3.1.</span> <span class="nav-text">make: Nothing to be done for ‘first’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-file-being-saved-was-created-by-a-Student-Version-of-Maya-intended-for-personal-learning-only-If-you-save-the-file-this-message-will-always-appear-whenever-the-file-is-opened"><span class="nav-number">3.2.</span> <span class="nav-text">The file being saved was created by a Student Version of Maya intended for personal learning only. If you save the file, this message will always appear whenever the file is opened.</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chi</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://ychichiy.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://z5612365.github.io/2017/08/14/install-PyQT-for-Maya-on-Ubuntu/';
+          this.page.identifier = '2017/08/14/install-PyQT-for-Maya-on-Ubuntu/';
+          this.page.title = 'Install PyQT for Maya(on Ubuntu)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ychichiy.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Firebase," />
+  <meta name="keywords" content="Maya," />
 
 
 
@@ -88,17 +88,19 @@
 
 
 
-<meta name="description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
-<meta name="keywords" content="Firebase">
+<meta name="description" content="透過Python寫出的Maya小工具來設定Display layer的visibility">
+<meta name="keywords" content="Maya">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Firebase開發（一）">
-<meta property="og:url" content="http://z5612365.github.io/2017/08/07/Firebase開發（一）/index.html">
+<meta property="og:title" content="Python control Maya Layer Editor">
+<meta property="og:url" content="http://z5612365.github.io/2017/08/14/Python-control-Maya-Layer-Editor/index.html">
 <meta property="og:site_name" content="ychichiy">
-<meta property="og:description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
-<meta property="og:updated_time" content="2017-08-09T17:04:14.355Z">
+<meta property="og:description" content="透過Python寫出的Maya小工具來設定Display layer的visibility">
+<meta property="og:image" content="http://z5612365.github.io/2017/08/14/Python-control-Maya-Layer-Editor/2017-08-18.gif">
+<meta property="og:updated_time" content="2017-08-18T16:25:40.622Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Firebase開發（一）">
-<meta name="twitter:description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
+<meta name="twitter:title" content="Python control Maya Layer Editor">
+<meta name="twitter:description" content="透過Python寫出的Maya小工具來設定Display layer的visibility">
+<meta name="twitter:image" content="http://z5612365.github.io/2017/08/14/Python-control-Maya-Layer-Editor/2017-08-18.gif">
 
 
 
@@ -126,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://z5612365.github.io/2017/08/07/Firebase開發（一）/"/>
+  <link rel="canonical" href="http://z5612365.github.io/2017/08/14/Python-control-Maya-Layer-Editor/"/>
 
 
 
 
 
-  <title>Firebase開發（一） | ychichiy</title>
+  <title>Python control Maya Layer Editor | ychichiy</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -261,7 +263,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/07/Firebase開發（一）/">
+    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/14/Python-control-Maya-Layer-Editor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chi">
@@ -278,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Firebase開發（一）</h1>
+          <h1 class="post-title" itemprop="name headline">Python control Maya Layer Editor</h1>
         
 
         <div class="post-meta">
@@ -290,8 +292,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-07T01:40:37+08:00">
-                2017-08-07
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-14T16:32:35+08:00">
+                2017-08-14
               </time>
             
 
@@ -309,9 +311,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/07/Firebase開發（一）/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/14/Python-control-Maya-Layer-Editor/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/07/Firebase開發（一）/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/14/Python-control-Maya-Layer-Editor/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -336,16 +338,14 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><span style="color:red">本章節介紹基礎的Firebase Database使用。</span><br>Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。</p>
+        <p>透過Python寫出的Maya小工具來設定Display layer的visibility</p>
 <a id="more"></a>
-<p>能夠省去開發的大量時間，支援Android/iOS/Web的app。</p>
-<h1 id="使用套件"><a href="#使用套件" class="headerlink" title="使用套件"></a>使用套件</h1><ol>
-<li><a href="https://firebase.google.com/" target="_blank" rel="external">firebase</a></li>
-<li><a href="https://github.com/firebase/firebase-import" target="_blank" rel="external">firebase-import</a></li>
-</ol>
-<h1 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h1><p>import data</p>
-<p>Get data</p>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://firebase.google.com/" target="_blank" rel="external">https://firebase.google.com/</a><br><a href="https://dotblogs.com.tw/leo_codespace/2017/01/04/230531" target="_blank" rel="external">https://dotblogs.com.tw/leo_codespace/2017/01/04/230531</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">import pymel.core as pm</div><div class="line">import maya.cmds as cmds</div><div class="line">import maya.OpenMayaUI as apiUI</div><div class="line"></div><div class="line">def toggleDisplayLayer(*arg):</div><div class="line">    displayLayerName=pm.textScrollList(&apos;displayLayer&apos;,query=True,selectItem=True)</div><div class="line">    val=cmds.getAttr(&apos;%s.visibility&apos;%displayLayerName[0])</div><div class="line">    if val:</div><div class="line">        cmds.setAttr(&apos;%s.visibility&apos;%displayLayerName[0],0)</div><div class="line">    else:</div><div class="line">        cmds.setAttr(&apos;%s.visibility&apos;%displayLayerName[0],1)</div><div class="line"></div><div class="line">pm.window(title=&apos;demo&apos;,width=200)</div><div class="line">pm.columnLayout(adjustableColumn=True)</div><div class="line">displayLayerList =cmds.ls(type=&apos;displayLayer&apos;)</div><div class="line">pm.textScrollList(&apos;displayLayer&apos;,append=displayLayerList)</div><div class="line">pm.button(label=&apos;On/Off Display Layout&apos;,command=toggleDisplayLayer)</div><div class="line">pm.showWindow()</div></pre></td></tr></table></figure>
+<p>下面GIF Demo，左邊是Maya主視窗，右上角的Attribute Editor可以從Maya的Display layer按右鍵打開，右下角就是我們所寫的小工具。</p>
+<p><img src="2017-08-18.gif" alt=""></p>
+<p>可以看到，不管是Attribute Editor或是我們的小工具，改變了visibility屬性，原本Maya主視窗的UI並不會更新，不過如果是從Maya主視窗更改設定的話，Attribute Editor卻會同時更新改變。</p>
+<p>所以還要找一下有沒有方法能夠讓我們的小工具設定了visibility屬性後，更新Maya UI的方法。</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://www.youtube.com/watch?v=3iNNVrCuxME" target="_blank" rel="external">https://www.youtube.com/watch?v=3iNNVrCuxME</a></p>
 
       
     </div>
@@ -375,7 +375,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Firebase/" rel="tag"># Firebase</a>
+            <a href="/tags/Maya/" rel="tag"># Maya</a>
           
         </div>
       
@@ -388,8 +388,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務（一）/" rel="next" title="nginx-rtmp-module實現mpeg-dash流直播服務（一）">
-                <i class="fa fa-chevron-left"></i> nginx-rtmp-module實現mpeg-dash流直播服務（一）
+              <a href="/2017/08/07/Firebase開發（一）/" rel="next" title="Firebase開發（一）">
+                <i class="fa fa-chevron-left"></i> Firebase開發（一）
               </a>
             
           </div>
@@ -398,8 +398,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/14/Python-control-Maya-Layer-Editor/" rel="prev" title="Python control Maya Layer Editor">
-                Python control Maya Layer Editor <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/14/install-PyQT-for-Maya-on-Ubuntu/" rel="prev" title="Install PyQT for Maya(on Ubuntu)">
+                Install PyQT for Maya(on Ubuntu) <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -546,7 +546,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用套件"><span class="nav-number">2.</span> <span class="nav-text">使用套件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Database"><span class="nav-number">3.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">1.</span> <span class="nav-text">參考</span></a></li></ol></div>
             
 
           </div>
@@ -685,9 +685,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://z5612365.github.io/2017/08/07/Firebase開發（一）/';
-          this.page.identifier = '2017/08/07/Firebase開發（一）/';
-          this.page.title = 'Firebase開發（一）';
+          this.page.url = 'http://z5612365.github.io/2017/08/14/Python-control-Maya-Layer-Editor/';
+          this.page.identifier = '2017/08/14/Python-control-Maya-Layer-Editor/';
+          this.page.title = 'Python control Maya Layer Editor';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://ychichiy.disqus.com/embed.js';
