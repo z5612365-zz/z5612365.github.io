@@ -1,0 +1,797 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Maya," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言我們Plugin執行中其實是可以傳參數的，而Function的參數又分為兩種，”Flags” and “Command Arguments”。在Maya API中Flags和Command Arguments有分別不同的意義，這個章節是介紹如何傳單一個Flag，下一章節將會提到如何在Flag中包多個參數傳遞。">
+<meta name="keywords" content="Maya">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maya Python API Tutorial（二）">
+<meta property="og:url" content="http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（二）/index.html">
+<meta property="og:site_name" content="ychichiy">
+<meta property="og:description" content="前言我們Plugin執行中其實是可以傳參數的，而Function的參數又分為兩種，”Flags” and “Command Arguments”。在Maya API中Flags和Command Arguments有分別不同的意義，這個章節是介紹如何傳單一個Flag，下一章節將會提到如何在Flag中包多個參數傳遞。">
+<meta property="og:updated_time" content="2017-08-22T11:59:57.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maya Python API Tutorial（二）">
+<meta name="twitter:description" content="前言我們Plugin執行中其實是可以傳參數的，而Function的參數又分為兩種，”Flags” and “Command Arguments”。在Maya API中Flags和Command Arguments有分別不同的意義，這個章節是介紹如何傳單一個Flag，下一章節將會提到如何在Flag中包多個參數傳遞。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（二）/"/>
+
+
+
+
+
+  <title>Maya Python API Tutorial（二） | ychichiy</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-104101762-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ychichiy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/9198887?v=4&u=b6a6cc256894fc3d4631148039900fc7370481bf&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ychichiy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Maya Python API Tutorial（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-21T19:42:41+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/21/Maya-Python-API-Tutorial（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/21/Maya-Python-API-Tutorial（二）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>我們Plugin執行中其實是可以傳參數的，而Function的參數又分為兩種，”Flags” and “Command Arguments”。<br>在Maya API中Flags和Command Arguments有分別不同的意義，這個章節是介紹如何傳單一個Flag，下一章節將會提到如何在Flag中包多個參數傳遞。<br><a id="more"></a></p>
+<h2 id="“Flags”-and-“Command-Arguments”"><a href="#“Flags”-and-“Command-Arguments”" class="headerlink" title="“Flags” and “Command Arguments”"></a>“Flags” and “Command Arguments”</h2><ol>
+<li><p>Flag</p>
+<ul>
+<li>介紹<br>flag有一個long name和一個short name，當我們在傳參數的時候，需要指定Flag Name。</li>
+<li><p>其他<br>一個Flag也可以包含多個參數，包成一個tuple的資料結構，類似RGB Color的感覺，這個在下一章節會介紹。</p>
+<blockquote>
+<p>Flags are optional to the normal functioning of a command. Each flag has a long and short name. When used in a MEL command, a flag is prefixed by a hyphen (‘-‘). In Python, flags appear as named function arguments without the hyphen. In the following example, the ‘sx’, ‘sy’, ‘sz’, and ‘h’ flags specify the number of subdivisions along each axis, as well as the height of the cube created with cmds.polyCube():</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import maya.cmds as cmds</div><div class="line">cmds.polyCube( sx=10, sy=15, sz=5, h=20 )</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>Command Argument</p>
+<ul>
+<li>介紹<br>不需要指定名稱，直接傳。</li>
+<li><p>其他</p>
+<blockquote>
+<p>Command arguments do not have associated names. When they are used in a MEL command, they appear at the end of the call. By contrast, due to the language design of Python, command arguments appear at the beginning of maya.cmds function calls. The example below illustrates the difference between command arguments and flags:</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">import maya.cmds as cmds</div><div class="line">cmds.group( &apos;circle1&apos;, &apos;sphere1&apos;, n=&apos;group1&apos; )</div></pre></td></tr></table></figure>
+<blockquote>
+<p>Here, ‘circle1’ and ‘sphere1’ are the command arguments of cmds.group(). They are placed before the optional ‘n’ flag, which is used to specify the name of the resulting group.</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="專案流程"><a href="#專案流程" class="headerlink" title="專案流程"></a>專案流程</h1><h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><p>新增一個檔案<br><strong>sampleCommandFlag.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"></div><div class="line"><span class="keyword">import</span> maya.api.OpenMaya <span class="keyword">as</span> OpenMaya</div><div class="line"><span class="comment"># ... additional imports here ...</span></div><div class="line"></div><div class="line">kShortFlagName = <span class="string">'-mf'</span></div><div class="line">kLongFlagName = <span class="string">'-myFlag'</span></div><div class="line"></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="comment"># Plug-in </span></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCommandWithFlagClass</span><span class="params">( OpenMaya.MPxCommand )</span>:</span></div><div class="line"></div><div class="line">    kPluginCmdName = <span class="string">'myCommandWithFlag'</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">''' Constructor. '''</span></div><div class="line">        OpenMaya.MPxCommand.__init__(self)</div><div class="line"></div><div class="line"><span class="meta">    @staticmethod </span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cmdCreator</span><span class="params">()</span>:</span></div><div class="line">        <span class="string">''' Create an instance of our command. '''</span></div><div class="line">        <span class="keyword">return</span> MyCommandWithFlagClass() </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">doIt</span><span class="params">(self, args)</span>:</span></div><div class="line">        <span class="string">''' Command execution. '''</span></div><div class="line">        </div><div class="line">        <span class="comment"># We recommend parsing your arguments first.</span></div><div class="line">        self.parseArguments( args )</div><div class="line"></div><div class="line">        <span class="comment"># Remove the following 'pass' keyword and replace it with the code you want to run. </span></div><div class="line">        <span class="keyword">pass</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parseArguments</span><span class="params">(self, args)</span>:</span></div><div class="line">        <span class="string">''' </span></div><div class="line">        The presence of this function is not enforced,</div><div class="line">        but helps separate argument parsing code from other</div><div class="line">        command code. </div><div class="line">        '''</div><div class="line">        </div><div class="line">        <span class="comment"># The following MArgParser object allows you to check if specific flags are set.</span></div><div class="line">        argData = OpenMaya.MArgParser( self.syntax(), args )</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> argData.isFlagSet( kShortFlagName ):</div><div class="line">                </div><div class="line">            <span class="comment"># In this case, we print the passed flag's value as an integer.</span></div><div class="line">            <span class="comment"># We use the '0' to index the flag's first and only parameter.</span></div><div class="line">            flagValue = argData.flagArgumentInt( kShortFlagName, <span class="number">0</span> )</div><div class="line">            <span class="keyword">print</span> kLongFlagName + <span class="string">': '</span> + str( flagValue )</div><div class="line">            </div><div class="line">        </div><div class="line">        <span class="comment"># ... If there are more flags, process them here ...</span></div><div class="line"></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="comment"># Plug-in initialization.</span></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">syntaxCreator</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">''' Defines the argument and flag syntax for this command. '''</span></div><div class="line">    syntax = OpenMaya.MSyntax()</div><div class="line">    </div><div class="line">    <span class="comment"># In this example, our flag will be expecting a numeric value, denoted by OpenMaya.MSyntax.kDouble. </span></div><div class="line">    syntax.addFlag( kShortFlagName, kLongFlagName, OpenMaya.MSyntax.kDouble )</div><div class="line">    </div><div class="line">    <span class="comment"># ... Add more flags here ...</span></div><div class="line">        </div><div class="line">    <span class="keyword">return</span> syntax</div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maya_useNewAPI</span><span class="params">()</span>:</span></div><div class="line">	<span class="string">"""</span></div><div class="line">	The presence of this function tells Maya that the plugin produces, and</div><div class="line">	expects to be passed, objects created using the Maya Python API 2.0.</div><div class="line">	"""</div><div class="line">	<span class="keyword">pass</span></div><div class="line">	</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">initializePlugin</span><span class="params">( mobject )</span>:</span></div><div class="line">    <span class="string">''' Initialize the plug-in when Maya loads it. '''</span></div><div class="line">    mplugin = OpenMaya.MFnPlugin( mobject )</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        mplugin.registerCommand( MyCommandWithFlagClass.kPluginCmdName, MyCommandWithFlagClass.cmdCreator, syntaxCreator )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stderr.write( <span class="string">'Failed to register command: '</span> + MyCommandWithFlagClass.kPluginCmdName )</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">uninitializePlugin</span><span class="params">( mobject )</span>:</span></div><div class="line">    <span class="string">''' Uninitialize the plug-in when Maya un-loads it. '''</span></div><div class="line">    mplugin = OpenMaya.MFnPlugin( mobject )</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        mplugin.deregisterCommand( MyCommandWithFlagClass.kPluginCmdName )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stderr.write( <span class="string">'Failed to unregister command: '</span> + MyCommandWithFlagClass.kPluginCmdName )</div><div class="line"></div></pre></td></tr></table></figure>
+<p>詳情請看<a href="#程式說明">程式說明</a></p>
+<h2 id="Run-Maya’s-Script-Editor"><a href="#Run-Maya’s-Script-Editor" class="headerlink" title="Run Maya’s Script Editor"></a>Run Maya’s Script Editor</h2><p>在maya的python command輸入:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> maya.cmds <span class="keyword">as</span> cmds</div><div class="line">cmds.loadPlugin( <span class="string">'sampleCommandFlag.py'</span> )</div><div class="line">cmds.myCommandWithFlag( myFlag = <span class="number">4</span> )</div><div class="line">cmds.myCommandWithFlag( mf = <span class="number">4</span> )</div><div class="line">-myFlag: <span class="number">4</span></div><div class="line">-myFlag: <span class="number">4</span></div></pre></td></tr></table></figure>
+<p>就會把sampleCommandFlag.py載入到maya Plugin中</p>
+<h1 id="程式說明"><a href="#程式說明" class="headerlink" title="程式說明"></a>程式說明</h1><h2 id="Plug-in-initialization"><a href="#Plug-in-initialization" class="headerlink" title="Plug-in initialization"></a>Plug-in initialization</h2><p>一樣先看Plug-in initialization的部份</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="comment"># Plug-in initialization.</span></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">syntaxCreator</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">''' Defines the argument and flag syntax for this command. '''</span></div><div class="line">    syntax = OpenMaya.MSyntax()</div><div class="line">    </div><div class="line">    <span class="comment"># In this example, our flag will be expecting a numeric value, denoted by OpenMaya.MSyntax.kDouble. </span></div><div class="line">    syntax.addFlag( kShortFlagName, kLongFlagName, OpenMaya.MSyntax.kDouble )</div><div class="line">    </div><div class="line">    <span class="comment"># ... Add more flags here ...</span></div><div class="line">        </div><div class="line">    <span class="keyword">return</span> syntax</div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maya_useNewAPI</span><span class="params">()</span>:</span></div><div class="line">	<span class="string">"""</span></div><div class="line">	The presence of this function tells Maya that the plugin produces, and</div><div class="line">	expects to be passed, objects created using the Maya Python API 2.0.</div><div class="line">	"""</div><div class="line">	<span class="keyword">pass</span></div><div class="line">	</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">initializePlugin</span><span class="params">( mobject )</span>:</span></div><div class="line">    <span class="string">''' Initialize the plug-in when Maya loads it. '''</span></div><div class="line">    mplugin = OpenMaya.MFnPlugin( mobject )</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        mplugin.registerCommand( MyCommandWithFlagClass.kPluginCmdName, MyCommandWithFlagClass.cmdCreator, syntaxCreator )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stderr.write( <span class="string">'Failed to register command: '</span> + MyCommandWithFlagClass.kPluginCmdName )</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">uninitializePlugin</span><span class="params">( mobject )</span>:</span></div><div class="line">    <span class="string">''' Uninitialize the plug-in when Maya un-loads it. '''</span></div><div class="line">    mplugin = OpenMaya.MFnPlugin( mobject )</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        mplugin.deregisterCommand( MyCommandWithFlagClass.kPluginCmdName )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stderr.write( <span class="string">'Failed to unregister command: '</span> + MyCommandWithFlagClass.kPluginCmdName )</div><div class="line"></div></pre></td></tr></table></figure>
+<h3 id="maya-useNewAPI、initializePlugin、uninitializePlugin"><a href="#maya-useNewAPI、initializePlugin、uninitializePlugin" class="headerlink" title="maya_useNewAPI、initializePlugin、uninitializePlugin"></a>maya_useNewAPI、initializePlugin、uninitializePlugin</h3><p>這3個function在上一個章節已經提到過了。<br>maya_useNewAPI和uninitializePlugin沒有太大的差別。<br>值得注意的是我們在initializePlugin的mplugin.registerCommand裏面多加了第3個參數syntaxCreator<br>這個MFnPlugin.registerCommand()的參數結構是</p>
+<ol>
+<li>Command Name（上個章節）</li>
+<li>Command Creation Function Reference（上個章節）</li>
+<li>Syntax Creation Function<br>這個參數必須塞入一個回傳<a href="http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__py_ref_class_open_maya_1_1_m_syntax_html" target="_blank" rel="external">MSyntax object</a>的function，在這個例子就是我們定義的syntaxCreator function<blockquote>
+<p> A reference to the function which returns an MSyntax object: syntaxCreator</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="syntaxCreator"><a href="#syntaxCreator" class="headerlink" title="syntaxCreator"></a>syntaxCreator</h3><blockquote>
+<p>MSyntax object defines the long and short names of each flag, as well as the expected type(s) of each flag. The short flag name (kShortFlagName) should be a one or two letter string prefixed by a hyphen: ‘-mf’. The long flag name (kLongFlagName) is generally more descriptive and should also be prefixed by a hyphen: ‘-myFlag’.</p>
+</blockquote>
+<p>MSyntax object需要定義一個long flag name和一個short flag name還有一個expected type。<br>也因此我們輸入flag的時候用long/short都可以，可以參考上面的<a href="#Run-Maya’s-Script-Editor">Run Maya’s Script Editor</a></p>
+<ol>
+<li><p>short flag name<br>是由一個或兩個字所組成，並在前面搭配一個橫槓。<br>像這個例子裡short flag name就是’-mf’並存在kShortFlagName變數裡。</p>
+</li>
+<li><p>long flag name<br>一樣前面有一個橫槓，然後接著具有描述性的名詞。<br>這個例子裡short flag name就是’-myFlag’並存在並存在kLongFlagName</p>
+</li>
+<li><p>expected type<br>這裡OpenMaya.MSyntax.kDouble就是代表我們之後塞入的參數會是Double型態的。</p>
+</li>
+</ol>
+<h2 id="Plug-in"><a href="#Plug-in" class="headerlink" title="Plug-in"></a>Plug-in</h2><p>接下來往上看Plug-in的部份</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="comment"># Plug-in </span></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCommandWithFlagClass</span><span class="params">( OpenMaya.MPxCommand )</span>:</span></div><div class="line"></div><div class="line">    kPluginCmdName = <span class="string">'myCommandWithFlag'</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">''' Constructor. '''</span></div><div class="line">        OpenMaya.MPxCommand.__init__(self)</div><div class="line"></div><div class="line"><span class="meta">    @staticmethod </span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cmdCreator</span><span class="params">()</span>:</span></div><div class="line">        <span class="string">''' Create an instance of our command. '''</span></div><div class="line">        <span class="keyword">return</span> MyCommandWithFlagClass() </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">doIt</span><span class="params">(self, args)</span>:</span></div><div class="line">        <span class="string">''' Command execution. '''</span></div><div class="line">        </div><div class="line">        <span class="comment"># We recommend parsing your arguments first.</span></div><div class="line">        self.parseArguments( args )</div><div class="line"></div><div class="line">        <span class="comment"># Remove the following 'pass' keyword and replace it with the code you want to run. </span></div><div class="line">        <span class="keyword">pass</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parseArguments</span><span class="params">(self, args)</span>:</span></div><div class="line">        <span class="string">''' </span></div><div class="line">        The presence of this function is not enforced,</div><div class="line">        but helps separate argument parsing code from other</div><div class="line">        command code. </div><div class="line">        '''</div><div class="line">        </div><div class="line">        <span class="comment"># The following MArgParser object allows you to check if specific flags are set.</span></div><div class="line">        argData = OpenMaya.MArgParser( self.syntax(), args )</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> argData.isFlagSet( kShortFlagName ):</div><div class="line">                </div><div class="line">            <span class="comment"># In this case, we print the passed flag's value as an integer.</span></div><div class="line">            <span class="comment"># We use the '0' to index the flag's first and only parameter.</span></div><div class="line">            flagValue = argData.flagArgumentInt( kShortFlagName, <span class="number">0</span> )</div><div class="line">            <span class="keyword">print</span> kLongFlagName + <span class="string">': '</span> + str( flagValue )</div><div class="line">            </div><div class="line">        </div><div class="line">        <span class="comment"># ... If there are more flags, process them here ...</span></div><div class="line"></div></pre></td></tr></table></figure>
+<h3 id="init-、cmdCreator"><a href="#init-、cmdCreator" class="headerlink" title="__init__、cmdCreator"></a>__init__、cmdCreator</h3><p>這兩個和上一章沒有太大的差別。</p>
+<h3 id="doIt"><a href="#doIt" class="headerlink" title="doIt"></a>doIt</h3><p>呼叫parseArguments執行</p>
+<h3 id="parseArguments"><a href="#parseArguments" class="headerlink" title="parseArguments"></a>parseArguments</h3><p>初始化OpenMaya.MArgParser<br>MArgParser.isFlagSet()用來check特定flag是否存在<br>MArgParser.flagArgumentInt(flagName, argIndex)用來取得第argIndex個flagName的值(int)。</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ol>
+<li>Command Arguments and Flags<br><a href="http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__files_GUID_A343C962_AEE1_4113_9DEC_1A88CF818AE9_htm" target="_blank" rel="external">http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__files_GUID_A343C962_AEE1_4113_9DEC_1A88CF818AE9_htm</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Maya/" rel="tag"># Maya</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/21/Maya-Python-API-Tutorial（一）/" rel="next" title="Maya Python API Tutorial（一）">
+                <i class="fa fa-chevron-left"></i> Maya Python API Tutorial（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/21/Maya-Python-API-Tutorial（三）/" rel="prev" title="Maya Python API Tutorial（三）">
+                Maya Python API Tutorial（三） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/9198887?v=4&u=b6a6cc256894fc3d4631148039900fc7370481bf&s=400"
+               alt="Chi" />
+          <p class="site-author-name" itemprop="name">Chi</p>
+           
+              <p class="site-description motion-element" itemprop="description">Chi's Blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/z5612365" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/z5612365" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#“Flags”-and-“Command-Arguments”"><span class="nav-number">1.1.</span> <span class="nav-text">“Flags” and “Command Arguments”</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#專案流程"><span class="nav-number">2.</span> <span class="nav-text">專案流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Code"><span class="nav-number">2.1.</span> <span class="nav-text">Source Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run-Maya’s-Script-Editor"><span class="nav-number">2.2.</span> <span class="nav-text">Run Maya’s Script Editor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程式說明"><span class="nav-number">3.</span> <span class="nav-text">程式說明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Plug-in-initialization"><span class="nav-number">3.1.</span> <span class="nav-text">Plug-in initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#maya-useNewAPI、initializePlugin、uninitializePlugin"><span class="nav-number">3.1.1.</span> <span class="nav-text">maya_useNewAPI、initializePlugin、uninitializePlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#syntaxCreator"><span class="nav-number">3.1.2.</span> <span class="nav-text">syntaxCreator</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plug-in"><span class="nav-number">3.2.</span> <span class="nav-text">Plug-in</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#init-、cmdCreator"><span class="nav-number">3.2.1.</span> <span class="nav-text">__init__、cmdCreator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#doIt"><span class="nav-number">3.2.2.</span> <span class="nav-text">doIt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#parseArguments"><span class="nav-number">3.2.3.</span> <span class="nav-text">parseArguments</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chi</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://ychichiy.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（二）/';
+          this.page.identifier = '2017/08/21/Maya-Python-API-Tutorial（二）/';
+          this.page.title = 'Maya Python API Tutorial（二）';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ychichiy.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

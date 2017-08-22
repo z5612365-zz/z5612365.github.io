@@ -1,0 +1,787 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Maya," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言其實官方Maya Help文件寫的蠻清楚了，建議強者可以直接參考文件，不過這個系列比較像是我自己學習的心得，方便讓自己消化，也讓剛接觸的人可以無痛上手（當初發現中文資料超少的QQ）。">
+<meta name="keywords" content="Maya">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Maya Python API Tutorial（一）">
+<meta property="og:url" content="http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（一）/index.html">
+<meta property="og:site_name" content="ychichiy">
+<meta property="og:description" content="前言其實官方Maya Help文件寫的蠻清楚了，建議強者可以直接參考文件，不過這個系列比較像是我自己學習的心得，方便讓自己消化，也讓剛接觸的人可以無痛上手（當初發現中文資料超少的QQ）。">
+<meta property="og:image" content="http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（一）/096.png">
+<meta property="og:updated_time" content="2017-08-22T11:59:44.185Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Maya Python API Tutorial（一）">
+<meta name="twitter:description" content="前言其實官方Maya Help文件寫的蠻清楚了，建議強者可以直接參考文件，不過這個系列比較像是我自己學習的心得，方便讓自己消化，也讓剛接觸的人可以無痛上手（當初發現中文資料超少的QQ）。">
+<meta name="twitter:image" content="http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（一）/096.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（一）/"/>
+
+
+
+
+
+  <title>Maya Python API Tutorial（一） | ychichiy</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-104101762-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ychichiy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/9198887?v=4&u=b6a6cc256894fc3d4631148039900fc7370481bf&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ychichiy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Maya Python API Tutorial（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-21T02:49:11+08:00">
+                2017-08-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/21/Maya-Python-API-Tutorial（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/21/Maya-Python-API-Tutorial（一）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>其實官方<a href="http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__files_Maya_Python_API_htm" target="_blank" rel="external">Maya Help</a>文件寫的蠻清楚了，建議強者可以直接參考文件，不過這個系列比較像是我自己學習的心得，方便讓自己消化，也讓剛接觸的人可以無痛上手（當初發現中文資料超少的QQ）。</p>
+<a id="more"></a>
+<p>開發一律使用Python API 2.0</p>
+<h1 id="Run-Maya’s-Script-Editor的快速鍵"><a href="#Run-Maya’s-Script-Editor的快速鍵" class="headerlink" title="Run Maya’s Script Editor的快速鍵"></a>Run Maya’s Script Editor的快速鍵</h1><p>ctrl+A 全選指令 , 按下數字鍵那邊的Enter</p>
+<h1 id="First-Command-Plug-in"><a href="#First-Command-Plug-in" class="headerlink" title="First Command Plug-in"></a>First Command Plug-in</h1><p>在maya的mel command輸入: <code>getenv MAYA_PLUG_IN_PATH</code> 並執行<br>就可以看到現在MAYA_PLUG_IN_PATH有包含哪些路徑</p>
+<p>代表我們所開發的plugin只要再這些目錄其中一個都可以！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">getenv MAYA_PLUG_IN_PATH;</div><div class="line">// Result: /home/chi/maya/2017/plug-ins:/home/chi/maya/plug-ins:/usr/autodesk/userconfig/maya/2017/plug-ins:/usr/autodesk/userconfig/maya/plug-ins:/usr/autodesk/maya/bin/plug-ins:/usr/autodesk/maya/plug-ins/bifrost/plug-ins:/usr/autodesk/maya/plug-ins/MASH/plug-ins:/usr/autodesk/maya/plug-ins/fbx/plug-ins:/usr/autodesk/maya/plug-ins/camd/plug-ins:/opt/solidangle/mtoa/2017/plug-ins:/usr/autodesk/maya/plug-ins/camd/plug-ins:/usr/autodesk/maya/plug-ins/camd/plug-ins:/usr/autodesk/maya/plug-ins/substance/plug-ins:/usr/autodesk/maya/plug-ins/xgen/plug-ins //</div></pre></td></tr></table></figure>
+<p>我個人是選擇/home/chi/maya/plug-ins這個資料夾來進行開發，如果該目錄下沒有plug-ins資料夾就自己建立一個吧！</p>
+<h1 id="專案流程"><a href="#專案流程" class="headerlink" title="專案流程"></a>專案流程</h1><h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><p>接下來在該資料夾下新增一個檔案<br><strong>sampleCommand.py</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> maya.api.OpenMaya <span class="keyword">as</span> OpenMaya</div><div class="line"><span class="comment"># ... additional imports here ...</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="comment"># Plug-in </span></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCommandClass</span><span class="params">( OpenMaya.MPxCommand )</span>:</span></div><div class="line">    kPluginCmdName = <span class="string">'myCommandName'</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">''' Constructor. '''</span></div><div class="line">        OpenMaya.MPxCommand.__init__(self)</div><div class="line">    </div><div class="line"><span class="meta">    @staticmethod </span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cmdCreator</span><span class="params">()</span>:</span></div><div class="line">        <span class="string">''' Create an instance of our command. '''</span></div><div class="line">        <span class="keyword">return</span> MyCommandClass() </div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">doIt</span><span class="params">(self, args)</span>:</span></div><div class="line">        <span class="string">''' Command execution. '''</span>        </div><div class="line">        <span class="comment"># Remove the following 'pass' keyword and replace it with </span></div><div class="line">        <span class="comment"># the code you want to run.</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line">    </div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="comment"># Plug-in initialization.</span></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maya_useNewAPI</span><span class="params">()</span>:</span></div><div class="line">	<span class="string">"""</span></div><div class="line">	The presence of this function tells Maya that the plugin produces, and</div><div class="line">	expects to be passed, objects created using the Maya Python API 2.0.</div><div class="line">	"""</div><div class="line">	<span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">initializePlugin</span><span class="params">( mobject )</span>:</span></div><div class="line">    <span class="string">''' Initialize the plug-in when Maya loads it. '''</span></div><div class="line">    mplugin = OpenMaya.MFnPlugin( mobject )</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        mplugin.registerCommand( MyCommandClass.kPluginCmdName, </div><div class="line">            MyCommandClass.cmdCreator )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stderr.write( <span class="string">'Failed to register command: '</span> + MyCommandClass.kPluginCmdName )</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">uninitializePlugin</span><span class="params">( mobject )</span>:</span></div><div class="line">    <span class="string">''' Uninitialize the plug-in when Maya un-loads it. '''</span></div><div class="line">    mplugin = OpenMaya.MFnPlugin( mobject )</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        mplugin.deregisterCommand( MyCommandClass.kPluginCmdName )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stderr.write( <span class="string">'Failed to unregister command: '</span> + MyCommandClass.kPluginCmdName )</div><div class="line"></div></pre></td></tr></table></figure>
+<p>詳情請看<a href="#程式說明">程式說明</a></p>
+<h2 id="Run-Maya’s-Script-Editor"><a href="#Run-Maya’s-Script-Editor" class="headerlink" title="Run Maya’s Script Editor"></a>Run Maya’s Script Editor</h2><p>在maya的python command輸入:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> maya.cmds <span class="keyword">as</span> cmds</div><div class="line">cmds.loadPlugin(<span class="string">'sampleCommand.py'</span>)</div><div class="line">cmds.myCommandName()</div><div class="line"></div></pre></td></tr></table></figure>
+<p>就會把sampleCommand.py載入到maya Plugin中</p>
+<p>要確認是不是真的載入，可以到Maya的 <strong>Windows &gt; Settings/Preferences &gt; Plug-in Manager</strong></p>
+<p><img src="096.png" alt=""></p>
+<p>可以看到sampleCommand.py已經載入成功！</p>
+<h1 id="程式說明"><a href="#程式說明" class="headerlink" title="程式說明"></a>程式說明</h1><h2 id="Plug-in-initialization"><a href="#Plug-in-initialization" class="headerlink" title="Plug-in initialization"></a>Plug-in initialization</h2><p>首先看下面的Plug-in initialization部份<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="comment"># Plug-in initialization.</span></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maya_useNewAPI</span><span class="params">()</span>:</span></div><div class="line">	<span class="string">"""</span></div><div class="line">	The presence of this function tells Maya that the plugin produces, and</div><div class="line">	expects to be passed, objects created using the Maya Python API 2.0.</div><div class="line">	"""</div><div class="line">	<span class="keyword">pass</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">initializePlugin</span><span class="params">( mobject )</span>:</span></div><div class="line">    <span class="string">''' Initialize the plug-in when Maya loads it. '''</span></div><div class="line">    mplugin = OpenMaya.MFnPlugin( mobject )</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        mplugin.registerCommand( MyCommandClass.kPluginCmdName, </div><div class="line">            MyCommandClass.cmdCreator )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stderr.write( <span class="string">'Failed to register command: '</span> + MyCommandClass.kPluginCmdName )</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">uninitializePlugin</span><span class="params">( mobject )</span>:</span></div><div class="line">    <span class="string">''' Uninitialize the plug-in when Maya un-loads it. '''</span></div><div class="line">    mplugin = OpenMaya.MFnPlugin( mobject )</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        mplugin.deregisterCommand( MyCommandClass.kPluginCmdName )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stderr.write( <span class="string">'Failed to unregister command: '</span> + MyCommandClass.kPluginCmdName )</div><div class="line"></div></pre></td></tr></table></figure><br>這邊有3個function</p>
+<ol>
+<li>maya_useNewAPI</li>
+<li>initializePlugin</li>
+<li>uninitializePlugin</li>
+</ol>
+<h3 id="initializePlugin、uninitializePlugin"><a href="#initializePlugin、uninitializePlugin" class="headerlink" title="initializePlugin、uninitializePlugin"></a>initializePlugin、uninitializePlugin</h3><p>Maya plug-ins官方規定，在我們的python檔案中因為要讓Maya知道如何load/unload，所以必須要有initializePlugin()及uninitializePlugin()兩個functions<br>裏面實作用的是OpenMaya.MFnPlugin的registerCommand()還有deregisterCommand()。</p>
+<h3 id="maya-useNewAPI"><a href="#maya-useNewAPI" class="headerlink" title="maya_useNewAPI"></a>maya_useNewAPI</h3><p>而maya_useNewAPI()的話是Python API 2.0所要定義的東西，負責告訴Maya什麼樣的type objects會被傳過去</p>
+<blockquote>
+<p>If these two functions do not exist in the file, the plug-in will fail to load.</p>
+<p>Note that in the Python API 1.0, the pointer must be cast to a valid Maya object using OpenMayaMPx.asMPxPtr(). This is not required in the Python API 2.0. However, a maya_useNewAPI() function must be defined to indicate what type objects are being passed.</p>
+</blockquote>
+<h2 id="Plug-in"><a href="#Plug-in" class="headerlink" title="Plug-in"></a>Plug-in</h2><p>接下來往上看Plug-in的部份</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="comment"># Plug-in </span></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCommandClass</span><span class="params">( OpenMaya.MPxCommand )</span>:</span></div><div class="line">    kPluginCmdName = <span class="string">'myCommandName'</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">''' Constructor. '''</span></div><div class="line">        OpenMaya.MPxCommand.__init__(self)</div><div class="line">    </div><div class="line"><span class="meta">    @staticmethod </span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">cmdCreator</span><span class="params">()</span>:</span></div><div class="line">        <span class="string">''' Create an instance of our command. '''</span></div><div class="line">        <span class="keyword">return</span> MyCommandClass() </div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">doIt</span><span class="params">(self, args)</span>:</span></div><div class="line">        <span class="string">''' Command execution. '''</span>        </div><div class="line">        <span class="comment"># Remove the following 'pass' keyword and replace it with </span></div><div class="line">        <span class="comment"># the code you want to run.</span></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div></pre></td></tr></table></figure>
+<p>這裡定義了一個我們自己的class，可以指定想要做的事情。</p>
+<h3 id="kPluginCmdName、cmdCreator"><a href="#kPluginCmdName、cmdCreator" class="headerlink" title="kPluginCmdName、cmdCreator"></a>kPluginCmdName、cmdCreator</h3><p>在這個例子中，由於我們的class繼承於OpenMaya.MPxCommand<br>所以我們必須要利用MFnPlugin.registerCommand()來進行register<br>而MFnPlugin.registerCommand()需要設定兩個參數</p>
+<ol>
+<li><p>Command Name<br>我們把kPluginCmdName設定成想要的名稱，在這裡我們把他叫作myCommandName，等一下在MEL command呼叫的時候，就是呼叫這個名稱。</p>
+</li>
+<li><p>Command Creation Function Reference<br>cmdCreator function負責建立並回傳我們class的實體</p>
+</li>
+</ol>
+<h3 id="init-、doIt"><a href="#init-、doIt" class="headerlink" title="__init__、doIt"></a>__init__、doIt</h3><p>眼尖的各位一定發現了，那我們class裏面還有兩個function是什麼呢？</p>
+<ol>
+<li><p>__init__<br>這個function就是Constructor（建構子），不過這個Constructor必須使用他的base class constructor來建構。<br>簡單來說因為我們的class繼承於OpenMaya.MPxCommand，所以要使用OpenMaya.MPxCommand他的建構子，並把自己作為參數丟過去。</p>
+<blockquote>
+<p>This is the command’s constructor. Its body must invoke the constructor of the base class from which it is derived.</p>
+</blockquote>
+</li>
+<li><p>doIt<br>這邊就可以定義想做的事情拉~<br>原本的範例就只有一個pass，所以也沒有做事情。<br>可以試著把pass拿掉，然後塞想要跑的指令玩玩看。</p>
+</li>
+</ol>
+<p>不只doIt()，class裏面還可以設定undoIt()還有redoIt()來用呢，這部份就之後介紹拉</p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ol>
+<li>Maya Sample Command Plug-in<br><a href="http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__files_GUID_85B1116E_F0C1_42AD_9CD4_30E936B6C7B8_htm" target="_blank" rel="external">http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__files_GUID_85B1116E_F0C1_42AD_9CD4_30E936B6C7B8_htm</a></li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Maya/" rel="tag"># Maya</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/17/What-is-Render-Farm/" rel="next" title="What is Render Farm">
+                <i class="fa fa-chevron-left"></i> What is Render Farm
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/21/Maya-Python-API-Tutorial（二）/" rel="prev" title="Maya Python API Tutorial（二）">
+                Maya Python API Tutorial（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/9198887?v=4&u=b6a6cc256894fc3d4631148039900fc7370481bf&s=400"
+               alt="Chi" />
+          <p class="site-author-name" itemprop="name">Chi</p>
+           
+              <p class="site-description motion-element" itemprop="description">Chi's Blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/z5612365" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/z5612365" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Run-Maya’s-Script-Editor的快速鍵"><span class="nav-number">2.</span> <span class="nav-text">Run Maya’s Script Editor的快速鍵</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#First-Command-Plug-in"><span class="nav-number">3.</span> <span class="nav-text">First Command Plug-in</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#專案流程"><span class="nav-number">4.</span> <span class="nav-text">專案流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Code"><span class="nav-number">4.1.</span> <span class="nav-text">Source Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Run-Maya’s-Script-Editor"><span class="nav-number">4.2.</span> <span class="nav-text">Run Maya’s Script Editor</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程式說明"><span class="nav-number">5.</span> <span class="nav-text">程式說明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Plug-in-initialization"><span class="nav-number">5.1.</span> <span class="nav-text">Plug-in initialization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#initializePlugin、uninitializePlugin"><span class="nav-number">5.1.1.</span> <span class="nav-text">initializePlugin、uninitializePlugin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#maya-useNewAPI"><span class="nav-number">5.1.2.</span> <span class="nav-text">maya_useNewAPI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Plug-in"><span class="nav-number">5.2.</span> <span class="nav-text">Plug-in</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#kPluginCmdName、cmdCreator"><span class="nav-number">5.2.1.</span> <span class="nav-text">kPluginCmdName、cmdCreator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#init-、doIt"><span class="nav-number">5.2.2.</span> <span class="nav-text">__init__、doIt</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">6.</span> <span class="nav-text">參考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chi</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://ychichiy.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（一）/';
+          this.page.identifier = '2017/08/21/Maya-Python-API-Tutorial（一）/';
+          this.page.title = 'Maya Python API Tutorial（一）';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ychichiy.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
