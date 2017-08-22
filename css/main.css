@@ -1710,7 +1710,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff8685;
+  background: #6fbe4e;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2883,6 +2883,117 @@ pre .javascript .function {
   .post-body {
     text-align: justify;
   }
+}
+body {
+  background: url("../image/denim-1039513_640.jpg");
+  background-repeat: repeat-x;
+  background-attachment: fixed;
+  background-position: 0% 50%;
+}
+.header-inner {
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  padding: 0;
+  width: 240px;
+  background: Wheat;
+  box-shadow: initial;
+  border-radius: initial;
+}
+@media (min-width: 1600px) {
+  .container .header-inner {
+    width: 240px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .header-inner {
+    position: relative;
+    width: auto;
+    border-radius: initial;
+  }
+}
+@media (max-width: 767px) {
+  .header-inner {
+    position: relative;
+    width: auto;
+    border-radius: initial;
+  }
+}
+.menu .menu-item {
+  display: block;
+  margin: 0;
+}
+.menu .menu-item a {
+  position: relative;
+  box-sizing: border-box;
+  padding: 5px 20px;
+  text-align: left;
+  line-height: inherit;
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+.menu .menu-item a:hover,
+.menu-item-active a {
+  background: Tan;
+  border-bottom-color: Wheat;
+}
+.menu .menu-item br {
+  display: none;
+}
+.menu-item-active a:after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  margin-top: -3px;
+  right: 15px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: Wheat;
+}
+.content-wrap {
+  border-style: solid;
+  border-color: Silver;
+  border-width: 0px 1px 1px 1px;
+  float: right;
+  box-sizing: border-box;
+  padding: 40px;
+  width: 82%;
+  background: #fff;
+  min-height: 700px;
+  box-shadow: initial;
+  border-radius: initial;
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .content-wrap {
+    width: 100%;
+    padding: 20px;
+    border-radius: initial;
+  }
+}
+@media (max-width: 767px) {
+  .content-wrap {
+    width: 100%;
+    padding: 20px;
+    min-height: auto;
+    border-radius: initial;
+  }
+}
+.sidebar-inner {
+  border-style: solid;
+  border-width: 6px;
+  box-sizing: border-box;
+  width: 240px;
+  color: #555;
+  background: #fff;
+  box-shadow: initial;
+  border-radius: initial;
+}
+.sidebar-inner.affix {
+  position: fixed;
+  top: 0px;
 }
 .site-author-image {
   display: block;
