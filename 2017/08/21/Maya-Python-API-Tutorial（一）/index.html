@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="ychichiy">
 <meta property="og:description" content="前言其實官方Maya Help文件寫的蠻清楚了，建議強者可以直接參考文件，不過這個系列比較像是我自己學習的心得，方便讓自己消化，也讓剛接觸的人可以無痛上手（當初發現中文資料超少的QQ）。">
 <meta property="og:image" content="http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial（一）/096.png">
-<meta property="og:updated_time" content="2017-08-22T11:59:44.185Z">
+<meta property="og:updated_time" content="2017-08-23T18:11:58.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Maya Python API Tutorial（一）">
 <meta name="twitter:description" content="前言其實官方Maya Help文件寫的蠻清楚了，建議強者可以直接參考文件，不過這個系列比較像是我自己學習的心得，方便讓自己消化，也讓剛接觸的人可以無痛上手（當初發現中文資料超少的QQ）。">
@@ -355,6 +355,7 @@
 <p>要確認是不是真的載入，可以到Maya的 <strong>Windows &gt; Settings/Preferences &gt; Plug-in Manager</strong></p>
 <p><img src="096.png" alt=""></p>
 <p>可以看到sampleCommand.py已經載入成功！</p>
+<hr>
 <h1 id="程式說明"><a href="#程式說明" class="headerlink" title="程式說明"></a>程式說明</h1><h2 id="Plug-in-initialization"><a href="#Plug-in-initialization" class="headerlink" title="Plug-in initialization"></a>Plug-in initialization</h2><p>首先看下面的Plug-in initialization部份<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="comment"># Plug-in initialization.</span></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">maya_useNewAPI</span><span class="params">()</span>:</span></div><div class="line">	<span class="string">"""</span></div><div class="line">	The presence of this function tells Maya that the plugin produces, and</div><div class="line">	expects to be passed, objects created using the Maya Python API 2.0.</div><div class="line">	"""</div><div class="line">	<span class="keyword">pass</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">initializePlugin</span><span class="params">( mobject )</span>:</span></div><div class="line">    <span class="string">''' Initialize the plug-in when Maya loads it. '''</span></div><div class="line">    mplugin = OpenMaya.MFnPlugin( mobject )</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        mplugin.registerCommand( MyCommandClass.kPluginCmdName, </div><div class="line">            MyCommandClass.cmdCreator )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stderr.write( <span class="string">'Failed to register command: '</span> + MyCommandClass.kPluginCmdName )</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">uninitializePlugin</span><span class="params">( mobject )</span>:</span></div><div class="line">    <span class="string">''' Uninitialize the plug-in when Maya un-loads it. '''</span></div><div class="line">    mplugin = OpenMaya.MFnPlugin( mobject )</div><div class="line">    <span class="keyword">try</span>:</div><div class="line">        mplugin.deregisterCommand( MyCommandClass.kPluginCmdName )</div><div class="line">    <span class="keyword">except</span>:</div><div class="line">        sys.stderr.write( <span class="string">'Failed to unregister command: '</span> + MyCommandClass.kPluginCmdName )</div><div class="line"></div></pre></td></tr></table></figure><br>這邊有3個function</p>
 <ol>
 <li>maya_useNewAPI</li>
@@ -523,7 +524,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>

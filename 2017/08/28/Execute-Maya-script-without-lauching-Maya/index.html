@@ -1,0 +1,763 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="前言開發Maya Tool有兩種方式，參考  maya.standalone不用lauch Maya，直接用mayapy執行。UI可以用PyQT做。  Maya plugin根據官方規定開發格式的py檔，藉由Maya command load到Maya plugin，不過要使用一樣需要lauch Maya，這個網路上已經有相當多介紹了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Execute Maya script without lauching Maya">
+<meta property="og:url" content="http://z5612365.github.io/2017/08/28/Execute-Maya-script-without-lauching-Maya/index.html">
+<meta property="og:site_name" content="ychichiy">
+<meta property="og:description" content="前言開發Maya Tool有兩種方式，參考  maya.standalone不用lauch Maya，直接用mayapy執行。UI可以用PyQT做。  Maya plugin根據官方規定開發格式的py檔，藉由Maya command load到Maya plugin，不過要使用一樣需要lauch Maya，這個網路上已經有相當多介紹了。">
+<meta property="og:image" content="http://z5612365.github.io/2017/08/28/Execute-Maya-script-without-lauching-Maya/099.png">
+<meta property="og:updated_time" content="2017-08-28T00:00:36.774Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Execute Maya script without lauching Maya">
+<meta name="twitter:description" content="前言開發Maya Tool有兩種方式，參考  maya.standalone不用lauch Maya，直接用mayapy執行。UI可以用PyQT做。  Maya plugin根據官方規定開發格式的py檔，藉由Maya command load到Maya plugin，不過要使用一樣需要lauch Maya，這個網路上已經有相當多介紹了。">
+<meta name="twitter:image" content="http://z5612365.github.io/2017/08/28/Execute-Maya-script-without-lauching-Maya/099.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://z5612365.github.io/2017/08/28/Execute-Maya-script-without-lauching-Maya/"/>
+
+
+
+
+
+  <title>Execute Maya script without lauching Maya | ychichiy</title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-104101762-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ychichiy</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/28/Execute-Maya-script-without-lauching-Maya/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/9198887?v=4&u=b6a6cc256894fc3d4631148039900fc7370481bf&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ychichiy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Execute Maya script without lauching Maya</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-28T00:47:13+08:00">
+                2017-08-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/28/Execute-Maya-script-without-lauching-Maya/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/28/Execute-Maya-script-without-lauching-Maya/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>開發Maya Tool有兩種方式，<a href="http://blog.csdn.net/efxer/article/details/12510059" target="_blank" rel="external">參考</a></p>
+<ol>
+<li><p>maya.standalone<br>不用lauch Maya，直接用mayapy執行。<br>UI可以用PyQT做。</p>
+</li>
+<li><p>Maya plugin<br>根據官方規定開發格式的py檔，藉由Maya command load到Maya plugin，不過要使用一樣需要lauch Maya，這個網路上已經有相當多介紹了。</p>
+</li>
+</ol>
+<a id="more"></a>
+<h1 id="測試"><a href="#測試" class="headerlink" title="測試"></a>測試</h1><p>主要是參考下面兩篇文章<br><a href="https://avtechartist.wordpress.com/2014/02/12/mayapy-interpreter-python-in-maya-standalone/" target="_blank" rel="external">https://avtechartist.wordpress.com/2014/02/12/mayapy-interpreter-python-in-maya-standalone/</a><br><a href="http://www.chadvernon.com/blog/resources/python-scripting-for-maya-artists/python-in-maya/" target="_blank" rel="external">http://www.chadvernon.com/blog/resources/python-scripting-for-maya-artists/python-in-maya/</a></p>
+<h2 id="鬼打牆"><a href="#鬼打牆" class="headerlink" title="鬼打牆"></a>鬼打牆</h2><p>不過測試總會出現以下ERROR<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">File read in  0.016 seconds.</div><div class="line">Traceback (most recent call last):</div><div class="line">  File &quot;/home/chi/Desktop/src/PycharmProjects/maya/test.py&quot;, line 51, in &lt;module&gt;</div><div class="line">    main()</div><div class="line">  File &quot;/home/chi/Desktop/src/PycharmProjects/maya/test.py&quot;, line 26, in main</div><div class="line">    cmds.file(fileToOpen, type=&apos;mayaAscii&apos;, open=True, prompt=False)</div><div class="line">RuntimeError: file: /home/chi/maya/test2.ma line 27: The camera &apos;perspShape&apos; has no &apos;.ai_translator&apos; attribute.</div><div class="line">file: /home/chi/maya/test2.ma line 27: setAttr: No object matches name: .ai_translator</div><div class="line">file: /home/chi/maya/test2.ma line 44: The camera &apos;topShape&apos; has no &apos;.ai_translator&apos; attribute.</div><div class="line">file: /home/chi/maya/test2.ma line 44: setAttr: No object matches name: .ai_translator</div><div class="line">file: /home/chi/maya/test2.ma line 60: The camera &apos;frontShape&apos; has no &apos;.ai_translator&apos; attribute.</div><div class="line">file: /home/chi/maya/test2.ma line 60: setAttr: No object matches name: .ai_translator</div><div class="line">file: /home/chi/maya/test2.ma line 77: The camera &apos;sideShape&apos; has no &apos;.ai_translator&apos; attribute.</div><div class="line">file: /home/chi/maya/test2.ma line 77: setAttr: No object matches name: .ai_translator</div><div class="line">file: /home/chi/maya/test2.ma line 90: The mesh &apos;pCubeShape1&apos; has no &apos;.ai_translator&apos; attribute.</div><div class="line">file: /home/chi/maya/test2.ma line 90: setAttr: No object matches name: .ai_translator</div><div class="line">Error reading file.</div><div class="line">Error reading file.</div></pre></td></tr></table></figure></p>
+<p>原本想說會不會是因為我的Maya是教育版，所以每次要load/save scene如果是在Maya都會跳出一個dialog，因此影響了從cammand load檔案。<br><img src="099.png" alt=""></p>
+<p>所以根據<a href="http://discourse.techart.online/t/how-to-disable-maya-data-loss-warning-on-open/2494" target="_blank" rel="external">這篇</a>的作法取消dialog，在load file的地方把prompt設為False。<br><code>cmds.file(fileToOpen, type=&#39;mayaBinary&#39;, open=True, prompt=False)</code><br>結果如果輸入的檔案是mb就會成功，ma就會失敗，而且error一樣存在…</p>
+<p>這個問題搞了我整整一天，最後放棄用maya.cmds的寫法。</p>
+<p><span style="color:DarkOrange "><br>update 1:<br>後來根據這個<a href="http://badboy99.logdown.com/posts/234765-fix-mayapy-crash-by-initialize-mel" target="_blank" rel="external">網站</a>的說法，只要有import pymel只要有就OK了，實際測試也真的成功了！<br>所以鬼打牆終於有解了！<br></span></p>
+<h2 id="成功寫法"><a href="#成功寫法" class="headerlink" title="成功寫法"></a>成功寫法</h2><p>後來我改了code，參考<a href="https://gist.github.com/AndrejAleksic/f27a50d81f0fbe706a15" target="_blank" rel="external">這個</a>寫法，讓程式使用pymel.core來load檔案而不是用maya.cmds</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">from</span> sys <span class="keyword">import</span> argv</div><div class="line"></div><div class="line"><span class="keyword">import</span> maya.standalone</div><div class="line">maya.standalone.initialize(name=<span class="string">'python'</span>)</div><div class="line"></div><div class="line"><span class="keyword">import</span> pymel.core <span class="keyword">as</span> pm</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">polycount</span><span class="params">(wfile)</span>:</span></div><div class="line">    poly_list = pm.ls(geometry=<span class="keyword">True</span>)</div><div class="line">    pm.select(poly_list, replace=<span class="keyword">True</span>)</div><div class="line">    polys = pm.polyEvaluate(triangle=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="comment"># list no. of triangles in output text file</span></div><div class="line">    wfile.write(<span class="string">"No. of Triangles: "</span> + str(polys) + <span class="string">"\n"</span>)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></div><div class="line">    fileToOpen = argv[<span class="number">1</span>]</div><div class="line">    filePath = argv[<span class="number">2</span>]</div><div class="line"></div><div class="line">    <span class="comment">#pm.openFile(fileToOpen, force=True,type='mayaBinary')  # If not forced, that in returns an non_saved error</span></div><div class="line">    pm.openFile(fileToOpen, force=<span class="keyword">True</span>, type=<span class="string">'mayaAscii'</span>)</div><div class="line"></div><div class="line">    fileId = open(filePath, <span class="string">"w"</span>)</div><div class="line">    polycount(fileId)</div><div class="line">    fileId.close()</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    main()</div><div class="line">    maya.standalone.uninitialize()</div><div class="line">    os._exit(<span class="number">0</span>)</div><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<p>在shell中執行類似下面的command:<code>mayapy python_path maya_scene_file output</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos;/usr/autodesk/maya2017/bin/mayapy&apos; &apos;/home/chi/Desktop/src/PycharmProjects/maya/test2.py&apos; &apos;/home/chi/maya/test2.ma&apos; &apos;/home/chi/maya/output&apos;</div></pre></td></tr></table></figure>
+<p>如果把mayapy的位置加到MAYA_LOCATION，就不用每次都打一大串，就可以直接用mayapy打指令了。</p>
+<p>如果沒有加os._exit(0)最後就會出現<code>pymel: hard exiting to avoid mayapy crash...</code>雖然還是能夠跑成功，<a href="https://groups.google.com/forum/#!topic/python_inside_maya/chpuSyLbryI" target="_blank" rel="external">參考</a></p>
+<h1 id="目標"><a href="#目標" class="headerlink" title="目標"></a>目標</h1><p><a href="https://vimeo.com/178309963" target="_blank" rel="external">https://vimeo.com/178309963</a></p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ol>
+<li><p>Standalone Scripts是在Maya Python API 1.0裡的<br><a href="http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__files_Maya_Python_API_Using_the_Maya_Python_API_htm" target="_blank" rel="external">http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__files_Maya_Python_API_Using_the_Maya_Python_API_htm</a><br>可以參考官方範例</p>
+</li>
+<li><p><a href="https://www.quora.com/How-do-I-execute-Maya-script-without-lauching-Maya" target="_blank" rel="external">https://www.quora.com/How-do-I-execute-Maya-script-without-lauching-Maya</a></p>
+</li>
+</ol>
+<p>======</p>
+<ol>
+<li><p><a href="https://stackoverflow.com/a/44056189" target="_blank" rel="external">https://stackoverflow.com/a/44056189</a></p>
+</li>
+<li><p><a href="http://help.autodesk.com/cloudhelp/2016/CHS/Maya-Tech-Docs/PyMel/standalone.html" target="_blank" rel="external">http://help.autodesk.com/cloudhelp/2016/CHS/Maya-Tech-Docs/PyMel/standalone.html</a></p>
+</li>
+<li><p><a href="http://discourse.techart.online/t/initialize-maya-standalone-from-cmd-prompt-with-mayapymanager/5795" target="_blank" rel="external">http://discourse.techart.online/t/initialize-maya-standalone-from-cmd-prompt-with-mayapymanager/5795</a></p>
+</li>
+<li><p><a href="https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-83799297-C629-48A8-BCE4-061D3F275215-htm.html" target="_blank" rel="external">https://knowledge.autodesk.com/support/maya/learn-explore/caas/CloudHelp/cloudhelp/2016/ENU/Maya/files/GUID-83799297-C629-48A8-BCE4-061D3F275215-htm.html</a></p>
+</li>
+<li><p><a href="http://discourse.techart.online/t/maya-python-cant-get-maya-to-initialize-through-external-interpreter-s/1352" target="_blank" rel="external">http://discourse.techart.online/t/maya-python-cant-get-maya-to-initialize-through-external-interpreter-s/1352</a></p>
+</li>
+</ol>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/27/Pycharm-IDE-Auto-Complete取代Maya原生Editor/" rel="next" title="Pycharm IDE+Auto Complete取代Maya原生Editor">
+                <i class="fa fa-chevron-left"></i> Pycharm IDE+Auto Complete取代Maya原生Editor
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/9198887?v=4&u=b6a6cc256894fc3d4631148039900fc7370481bf&s=400"
+               alt="Chi" />
+          <p class="site-author-name" itemprop="name">Chi</p>
+           
+              <p class="site-description motion-element" itemprop="description">Chi's Blog</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/z5612365" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.facebook.com/z5612365" target="_blank" title="Facebook">
+                  
+                    <i class="fa fa-fw fa-facebook"></i>
+                  
+                  Facebook
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#測試"><span class="nav-number">2.</span> <span class="nav-text">測試</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#鬼打牆"><span class="nav-number">2.1.</span> <span class="nav-text">鬼打牆</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成功寫法"><span class="nav-number">2.2.</span> <span class="nav-text">成功寫法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#目標"><span class="nav-number">3.</span> <span class="nav-text">目標</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chi</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://ychichiy.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://z5612365.github.io/2017/08/28/Execute-Maya-script-without-lauching-Maya/';
+          this.page.identifier = '2017/08/28/Execute-Maya-script-without-lauching-Maya/';
+          this.page.title = 'Execute Maya script without lauching Maya';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://ychichiy.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

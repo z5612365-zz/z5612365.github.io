@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Firebase," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -88,17 +88,16 @@
 
 
 
-<meta name="description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
-<meta name="keywords" content="Firebase">
+<meta name="description" content="前言Creating Objects with MDagModifier。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Firebase開發（一）">
-<meta property="og:url" content="http://z5612365.github.io/2017/08/07/Firebase開發（一）/index.html">
+<meta property="og:title" content="Maya Python API Tutorial（六）">
+<meta property="og:url" content="http://z5612365.github.io/2017/08/25/Maya-Python-API-Tutorial（六）/index.html">
 <meta property="og:site_name" content="ychichiy">
-<meta property="og:description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
-<meta property="og:updated_time" content="2017-08-09T17:04:14.355Z">
+<meta property="og:description" content="前言Creating Objects with MDagModifier。">
+<meta property="og:updated_time" content="2017-08-25T18:03:26.982Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Firebase開發（一）">
-<meta name="twitter:description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
+<meta name="twitter:title" content="Maya Python API Tutorial（六）">
+<meta name="twitter:description" content="前言Creating Objects with MDagModifier。">
 
 
 
@@ -126,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://z5612365.github.io/2017/08/07/Firebase開發（一）/"/>
+  <link rel="canonical" href="http://z5612365.github.io/2017/08/25/Maya-Python-API-Tutorial（六）/"/>
 
 
 
 
 
-  <title>Firebase開發（一） | ychichiy</title>
+  <title>Maya Python API Tutorial（六） | ychichiy</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -261,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/07/Firebase開發（一）/">
+    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/25/Maya-Python-API-Tutorial（六）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chi">
@@ -278,7 +277,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Firebase開發（一）</h1>
+          <h1 class="post-title" itemprop="name headline">Maya Python API Tutorial（六）</h1>
         
 
         <div class="post-meta">
@@ -290,8 +289,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-07T01:40:37+08:00">
-                2017-08-07
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-25T23:30:58+08:00">
+                2017-08-25
               </time>
             
 
@@ -309,9 +308,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/07/Firebase開發（一）/#comments" itemprop="discussionUrl">
+                <a href="/2017/08/25/Maya-Python-API-Tutorial（六）/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/07/Firebase開發（一）/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/08/25/Maya-Python-API-Tutorial（六）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -336,16 +335,21 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><span style="color:red">本章節介紹基礎的Firebase Database使用。</span><br>Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>Creating Objects with MDagModifier。</p>
 <a id="more"></a>
-<p>能夠省去開發的大量時間，支援Android/iOS/Web的app。</p>
-<h1 id="使用套件"><a href="#使用套件" class="headerlink" title="使用套件"></a>使用套件</h1><ol>
-<li><a href="https://firebase.google.com/" target="_blank" rel="external">firebase</a></li>
-<li><a href="https://github.com/firebase/firebase-import" target="_blank" rel="external">firebase-import</a></li>
+<h1 id="專案流程"><a href="#專案流程" class="headerlink" title="專案流程"></a>專案流程</h1><h2 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="comment"># Plug-in </span></div><div class="line"><span class="comment">##########################################################</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyCameraCommand</span><span class="params">( OpenMaya.MPxCommand )</span>:</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">''' Constructor. '''</span></div><div class="line">        OpenMaya.MPxCommand.__init__(self)</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">doIt</span><span class="params">(self, args)</span>:</span></div><div class="line">        <span class="string">''' doIt() is called once when the command is first executed. '''</span> </div><div class="line">        </div><div class="line">        <span class="comment"># This MDagModifier object will allow us to undo and redo the creation of DAG nodes in our command.</span></div><div class="line">        self.dagModifier = OpenMaya.MDagModifier()</div><div class="line">        </div><div class="line">        <span class="comment"># Create the camera transform node.</span></div><div class="line">        self.cameraTransformObj = self.dagModifier.createNode( <span class="string">'transform'</span> )</div><div class="line">        self.dagModifier.renameNode( self.cameraTransformObj, <span class="string">'myCameraTransform'</span> )</div><div class="line">        </div><div class="line">        <span class="comment"># Create the camera shape node as a child of the camera transform node.</span></div><div class="line">        self.cameraShapeObj = self.dagModifier.createNode( <span class="string">'camera'</span>, self.cameraTransformObj )</div><div class="line">        self.dagModifier.renameNode( self.cameraShapeObj, <span class="string">'myCameraShape'</span> )</div><div class="line">        </div><div class="line">        <span class="comment"># Call self.redoIt() to perform the command's actual work. This function call flow</span></div><div class="line">        <span class="comment"># is useful for code re-use.</span></div><div class="line">        self.redoIt()</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">redoIt</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">''' redoIt() is called every time the instance of this command is re-done from</span></div><div class="line">        the undo queue. '''</div><div class="line">        </div><div class="line">        <span class="comment"># Perform the operations enqueued within our reference to MDagModifier.</span></div><div class="line">        self.dagModifier.doIt()</div><div class="line">        </div><div class="line">        <span class="comment"># ... object manipulations ...</span></div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">undoIt</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">''' undoIt() is called every time the instance of this command is undone. '''</span></div><div class="line">        </div><div class="line">        <span class="comment"># ... revert object manipulations ...</span></div><div class="line">        </div><div class="line">        <span class="comment"># This call to MDagModifier.undoIt() undoes all the operations queued within the MDagModifier.</span></div><div class="line">        self.dagModifier.undoIt()</div><div class="line">    </div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isUndoable</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">''' This function indicates whether or not the command is undoable. If the</span></div><div class="line">        command is undoable, each executed instance of that command is added to the</div><div class="line">        undo queue. '''</div><div class="line">        </div><div class="line">        <span class="comment"># We must return True to specify that this command is undoable.</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line">    </div><div class="line">    </div></pre></td></tr></table></figure>
+<p>詳情請看<a href="#程式說明">程式說明</a></p>
+<hr>
+<h1 id="程式說明"><a href="#程式說明" class="headerlink" title="程式說明"></a>程式說明</h1><p>要創建DAG nodes還有綁定undoing操作，Maya API提供了MDagModifier class。<br>MDagModifier繼承自MDGModifier，MDGModifier是用來創建及操作Dependency Graph nodes。<br>前面的章節有說過，DAG是Dependency Graph的一部份，所以MDGModifier有的東西MDagModifier都有（繼承）。</p>
+<h2 id="Plug-in"><a href="#Plug-in" class="headerlink" title="Plug-in"></a>Plug-in</h2><ol>
+<li><p>MDagModifier.createNode()<br>當呼叫的時候會把他放到MDagModifier的queue，並且此function會回傳一個MObject，這個MObject用來handle新建立的Maya DAG node，但此node還未被included into DAG（要等MDagModifier.doIt()的時候）。<br>MDagModifier.createNode()可以有一個string參數，表示node type’s name，允許的參數可以參考 Maya User Guide &gt; Technical Documentation &gt; Nodes<br>另外還有MDagModifier.renameNode()，呼叫他一樣會被放到MDagModifier的queue裡，用來renaming of a node。</p>
+</li>
+<li><p>MDagModifier.doIt()<br>會執行之前在queue中的operations，比方說operation是MDagModifier.createNode()，就會完成建立一個node到DAG的操作，在此之前都事先放到queue裡，並沒有真的執行。<br>所以通常會把MDagModifier.doIt()放在redoIt()中，這樣一來就可以更有效率的建立node。<br>NOTE： 在同一個command中可以呼叫很多次MDagModifier.doIt()</p>
+</li>
+<li><p>MDagModifier.undoIt()<br>所有由MDagModifier.doIt()完成的operations將會被undone。<br>NOTE： 建議MDagModifier.undoIt()只呼叫一次，儘管MDagModifier.doIt()可以呼叫很多次。</p>
+</li>
 </ol>
-<h1 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h1><p>import data</p>
-<p>Get data</p>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://firebase.google.com/" target="_blank" rel="external">https://firebase.google.com/</a><br><a href="https://dotblogs.com.tw/leo_codespace/2017/01/04/230531" target="_blank" rel="external">https://dotblogs.com.tw/leo_codespace/2017/01/04/230531</a></p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__files_GUID_CC5EDDD2_4331_4CF8_863F_9DDDA90A343D_htm" target="_blank" rel="external">http://help.autodesk.com/view/MAYAUL/2017/CHS/?guid=__files_GUID_CC5EDDD2_4331_4CF8_863F_9DDDA90A343D_htm</a></p>
 
       
     </div>
@@ -373,12 +377,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Firebase/" rel="tag"># Firebase</a>
-          
-        </div>
-      
 
       
         
@@ -388,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務（一）/" rel="next" title="nginx-rtmp-module實現mpeg-dash流直播服務（一）">
-                <i class="fa fa-chevron-left"></i> nginx-rtmp-module實現mpeg-dash流直播服務（一）
+              <a href="/2017/08/24/Maya-Python-API-Tutorial（五）/" rel="next" title="Maya Python API Tutorial（五）">
+                <i class="fa fa-chevron-left"></i> Maya Python API Tutorial（五）
               </a>
             
           </div>
@@ -398,8 +396,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/14/Python-control-Maya-Layer-Editor/" rel="prev" title="Python control Maya Layer Editor">
-                Python control Maya Layer Editor <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/26/Maya-Python-API-Tutorial（七）/" rel="prev" title="Maya Python API Tutorial（七）">
+                Maya Python API Tutorial（七） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -546,7 +544,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用套件"><span class="nav-number">2.</span> <span class="nav-text">使用套件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Database"><span class="nav-number">3.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#專案流程"><span class="nav-number">2.</span> <span class="nav-text">專案流程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Source-Code"><span class="nav-number">2.1.</span> <span class="nav-text">Source Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程式說明"><span class="nav-number">3.</span> <span class="nav-text">程式說明</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Plug-in"><span class="nav-number">3.1.</span> <span class="nav-text">Plug-in</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
             
 
           </div>
@@ -685,9 +683,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://z5612365.github.io/2017/08/07/Firebase開發（一）/';
-          this.page.identifier = '2017/08/07/Firebase開發（一）/';
-          this.page.title = 'Firebase開發（一）';
+          this.page.url = 'http://z5612365.github.io/2017/08/25/Maya-Python-API-Tutorial（六）/';
+          this.page.identifier = '2017/08/25/Maya-Python-API-Tutorial（六）/';
+          this.page.title = 'Maya Python API Tutorial（六）';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://ychichiy.disqus.com/embed.js';
