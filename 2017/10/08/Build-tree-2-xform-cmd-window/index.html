@@ -72,7 +72,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Firebase," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -88,17 +88,18 @@
 
 
 
-<meta name="description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
-<meta name="keywords" content="Firebase">
+<meta name="description" content="前言建立一個window，點擊button後在被選取的所有點上建立object。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Firebase開發（一）">
-<meta property="og:url" content="http://z5612365.github.io/2017/08/07/Firebase開發（一）/index.html">
+<meta property="og:title" content="Build tree 2 (xform+cmd.window)">
+<meta property="og:url" content="http://z5612365.github.io/2017/10/08/Build-tree-2-xform-cmd-window/index.html">
 <meta property="og:site_name" content="ychichiy">
-<meta property="og:description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
-<meta property="og:updated_time" content="2017-08-09T17:04:14.355Z">
+<meta property="og:description" content="前言建立一個window，點擊button後在被選取的所有點上建立object。">
+<meta property="og:image" content="http://z5612365.github.io/2017/10/08/Build-tree-2-xform-cmd-window/25.gif">
+<meta property="og:updated_time" content="2017-10-07T18:39:07.259Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Firebase開發（一）">
-<meta name="twitter:description" content="前言本章節介紹基礎的Firebase Database使用。Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。">
+<meta name="twitter:title" content="Build tree 2 (xform+cmd.window)">
+<meta name="twitter:description" content="前言建立一個window，點擊button後在被選取的所有點上建立object。">
+<meta name="twitter:image" content="http://z5612365.github.io/2017/10/08/Build-tree-2-xform-cmd-window/25.gif">
 
 
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://z5612365.github.io/2017/08/07/Firebase開發（一）/"/>
+  <link rel="canonical" href="http://z5612365.github.io/2017/10/08/Build-tree-2-xform-cmd-window/"/>
 
 
 
 
 
-  <title>Firebase開發（一） | ychichiy</title>
+  <title>Build tree 2 (xform+cmd.window) | ychichiy</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -261,7 +262,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/08/07/Firebase開發（一）/">
+    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/2017/10/08/Build-tree-2-xform-cmd-window/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chi">
@@ -278,7 +279,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Firebase開發（一）</h1>
+          <h1 class="post-title" itemprop="name headline">Build tree 2 (xform+cmd.window)</h1>
         
 
         <div class="post-meta">
@@ -290,8 +291,8 @@
               
                 <span class="post-meta-item-text">發表於</span>
               
-              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-07T01:40:37+08:00">
-                2017-08-07
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-10-08T02:20:50+08:00">
+                2017-10-08
               </time>
             
 
@@ -309,9 +310,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/08/07/Firebase開發（一）/#comments" itemprop="discussionUrl">
+                <a href="/2017/10/08/Build-tree-2-xform-cmd-window/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2017/08/07/Firebase開發（一）/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2017/10/08/Build-tree-2-xform-cmd-window/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -336,16 +337,11 @@
       
 
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><span style="color:red">本章節介紹基礎的Firebase Database使用。</span><br>Firebase是一套Google提供的整合服務，讓開發者省去後端程式以及資料庫的開發，Realtime Database部份採用NoSQL，輸出JSON格式。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>建立一個window，點擊button後在被選取的所有點上建立object。</p>
 <a id="more"></a>
-<p>能夠省去開發的大量時間，支援Android/iOS/Web的app。</p>
-<h1 id="使用套件"><a href="#使用套件" class="headerlink" title="使用套件"></a>使用套件</h1><ol>
-<li><a href="https://firebase.google.com/" target="_blank" rel="external">firebase</a></li>
-<li><a href="https://github.com/firebase/firebase-import" target="_blank" rel="external">firebase-import</a></li>
-</ol>
-<h1 id="Database"><a href="#Database" class="headerlink" title="Database"></a>Database</h1><p>import data</p>
-<p>Get data</p>
-<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://firebase.google.com/" target="_blank" rel="external">https://firebase.google.com/</a><br><a href="https://dotblogs.com.tw/leo_codespace/2017/01/04/230531" target="_blank" rel="external">https://dotblogs.com.tw/leo_codespace/2017/01/04/230531</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> maya.cmds <span class="keyword">as</span> cmd</div><div class="line"></div><div class="line"><span class="keyword">if</span> cmd.window(<span class="string">"xform2"</span>,exists=<span class="keyword">True</span>):</div><div class="line">    cmd.delete(<span class="string">"xform2"</span>)</div><div class="line"></div><div class="line">RandomGWin=cmd.window(<span class="string">"xform2"</span>,t=<span class="string">"buid trees"</span>,w=<span class="number">300</span>,h=<span class="number">200</span>)</div><div class="line">cmd.columnLayout(adj=<span class="keyword">True</span>)</div><div class="line">cmd.separator(h=<span class="number">10</span>)</div><div class="line">cmd.text(<span class="string">"Select random vertices"</span>)</div><div class="line">cmd.separator(h=<span class="number">10</span>)</div><div class="line">cmd.button(l=<span class="string">"Generate Random Trees"</span>,h=<span class="number">30</span>,c=<span class="string">"ranGenerator()"</span>)</div><div class="line"></div><div class="line">cmd.showWindow(RandomGWin)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">ranGenerator</span><span class="params">()</span>:</span></div><div class="line">    myVerList = cmd.ls(selection=<span class="keyword">True</span>, fl=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    <span class="keyword">for</span> ver <span class="keyword">in</span> myVerList:</div><div class="line">        verPos = cmd.xform(ver, q=<span class="keyword">True</span>, ws=<span class="keyword">True</span>, t=<span class="keyword">True</span>)</div><div class="line">        Obj = create_Obj()</div><div class="line">        cmd.move(verPos[<span class="number">0</span>], verPos[<span class="number">1</span>], verPos[<span class="number">2</span>], Obj)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_Obj</span><span class="params">()</span>:</span></div><div class="line">    cube_height = <span class="number">6</span></div><div class="line">    cube = cmd.polyCube(sx=<span class="number">1</span>, sy=<span class="number">1</span>, sz=<span class="number">1</span>, w=<span class="number">0.5</span>, d=<span class="number">0.5</span>, h=cube_height)</div><div class="line">    cmd.move(<span class="number">0</span>, cube_height / <span class="number">2</span>, <span class="number">0</span>, cube)</div><div class="line"></div><div class="line">    cone_height = <span class="number">2</span></div><div class="line">    cone = cmd.polyCone(r=<span class="number">1</span>, h=cone_height)</div><div class="line">    cmd.move(<span class="number">0</span>, cone_height / <span class="number">2</span> + cube_height, <span class="number">0</span>, cone)</div><div class="line"></div><div class="line">    cmd.select(cube,cone)</div><div class="line">    cmd.group(n=<span class="string">'TreeGrp#'</span>)</div><div class="line"></div></pre></td></tr></table></figure>
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p><img src="25.gif" alt=""></p>
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a href="https://www.youtube.com/watch?v=sJP47Wt9YaI&amp;index=7&amp;list=PLdQnt7xu73OXBjKNlsA-lX9tWATVUjtA9" target="_blank" rel="external">https://www.youtube.com/watch?v=sJP47Wt9YaI&amp;index=7&amp;list=PLdQnt7xu73OXBjKNlsA-lX9tWATVUjtA9</a></p>
 
       
     </div>
@@ -373,12 +369,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Firebase/" rel="tag"># Firebase</a>
-          
-        </div>
-      
 
       
         
@@ -388,8 +378,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務（一）/" rel="next" title="nginx-rtmp-module實現mpeg-dash流直播服務（一）">
-                <i class="fa fa-chevron-left"></i> nginx-rtmp-module實現mpeg-dash流直播服務（一）
+              <a href="/2017/09/10/Maya-Event/" rel="next" title="Build tree (xform+Maya Event)">
+                <i class="fa fa-chevron-left"></i> Build tree (xform+Maya Event)
               </a>
             
           </div>
@@ -397,10 +387,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/14/Python-control-Maya-Layer-Editor/" rel="prev" title="Python control Maya Layer Editor">
-                Python control Maya Layer Editor <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -546,7 +532,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用套件"><span class="nav-number">2.</span> <span class="nav-text">使用套件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Database"><span class="nav-number">3.</span> <span class="nav-text">Database</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">4.</span> <span class="nav-text">參考</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Demo"><span class="nav-number">2.</span> <span class="nav-text">Demo</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">3.</span> <span class="nav-text">參考</span></a></li></ol></div>
             
 
           </div>
@@ -685,9 +671,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://z5612365.github.io/2017/08/07/Firebase開發（一）/';
-          this.page.identifier = '2017/08/07/Firebase開發（一）/';
-          this.page.title = 'Firebase開發（一）';
+          this.page.url = 'http://z5612365.github.io/2017/10/08/Build-tree-2-xform-cmd-window/';
+          this.page.identifier = '2017/10/08/Build-tree-2-xform-cmd-window/';
+          this.page.title = 'Build tree 2 (xform+cmd.window)';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://ychichiy.disqus.com/embed.js';

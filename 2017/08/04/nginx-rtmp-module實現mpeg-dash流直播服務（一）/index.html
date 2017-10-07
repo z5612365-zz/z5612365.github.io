@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://z5612365.github.io/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務（一）/index.html">
 <meta property="og:site_name" content="ychichiy">
 <meta property="og:description" content="前言這個系列第一篇就來教如何把本地影片串流到網頁上。nginx-rtmp-module是一套NGINX-based Media Streaming Server，不過nginx-rtmp-module不包含media decoder，故需要搭配ffmpeg把目標影片輸出成mpeg-dash流。">
-<meta property="og:updated_time" content="2017-08-16T17:17:46.516Z">
+<meta property="og:updated_time" content="2017-09-18T18:51:20.729Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nginx-rtmp-module實現mpeg-dash流直播服務（一）">
 <meta name="twitter:description" content="前言這個系列第一篇就來教如何把本地影片串流到網頁上。nginx-rtmp-module是一套NGINX-based Media Streaming Server，不過nginx-rtmp-module不包含media decoder，故需要搭配ffmpeg把目標影片輸出成mpeg-dash流。">
@@ -359,7 +359,7 @@
 <li>接收目標http url串流來呈現<br>(<code>http://localhost:8080/dash/mystream.mpd</code>)</li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">&lt;script src=&quot;https://cdn.dashjs.org/latest/dash.all.min.js&quot;&gt;&lt;/script&gt;</div><div class="line"></div><div class="line">&lt;style&gt;</div><div class="line">    video &#123;</div><div class="line">       width: 640px;</div><div class="line">       height: 360px;</div><div class="line">    &#125;</div><div class="line">&lt;/style&gt;</div><div class="line"></div><div class="line">&lt;body&gt;</div><div class="line">   &lt;div&gt;</div><div class="line">       &lt;video data-dashjs-player autoplay src=&quot;http://localhost:8080/dash/mystream.mpd&quot; controls&gt;&lt;/video&gt;</div><div class="line">   &lt;/div&gt;</div><div class="line">&lt;/body&gt;</div></pre></td></tr></table></figure>
-<p>demo <code>http://localhost:[port]/[file_path].html</code></p>
+<p>NGinx Default public www location <code>/usr/local/nginx/html</code><br>demo <code>http://localhost:[port]/[file_path].html</code><br>類似 <code>http://localhost:8080/test.html</code></p>
 <h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><ol>
 <li><a href="http://blog.csdn.net/u011432426/article/details/54730581" target="_blank" rel="external">http://blog.csdn.net/u011432426/article/details/54730581</a></li>
 <li><a href="https://streamroot.readme.io/v1.8/docs/nginx-rtmp" target="_blank" rel="external">https://streamroot.readme.io/v1.8/docs/nginx-rtmp</a></li>
@@ -494,7 +494,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">文章</span>
               </a>
             </div>
