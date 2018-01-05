@@ -91,7 +91,7 @@
 <meta name="description" content="Chi&apos;s Blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ychichiy">
-<meta property="og:url" content="http://z5612365.github.io/tags/Job/index.html">
+<meta property="og:url" content="http://z5612365.github.io/page/3/index.html">
 <meta property="og:site_name" content="ychichiy">
 <meta property="og:description" content="Chi&apos;s Blog">
 <meta name="twitter:card" content="summary">
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://z5612365.github.io/tags/Job/"/>
+  <link rel="canonical" href="http://z5612365.github.io/page/3/"/>
 
 
 
 
 
-  <title>標籤: Job | ychichiy</title>
+  <title>ychichiy</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
@@ -165,7 +165,9 @@
     
   
 
-  <div class="container sidebar-position-right  ">
+  <div class="container sidebar-position-right 
+   page-home 
+ ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -258,73 +260,144 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h1>Job<small>標籤</small>
-      </h1>
-    </div>
-
+  <section id="posts" class="posts-expand">
     
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/about/2017/08/17/What-is-Render-Farm/" itemprop="url">
-              
-                <span itemprop="name">What is Render Farm</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-17T01:34:49+08:00"
-              content="2017-08-17" >
-          08-17
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-      
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/about/2017/08/15/特效產業-Pipeline-TD/" itemprop="url">
-              
-                <span itemprop="name">特效產業 Pipeline TD</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-15T00:17:56+08:00"
-              content="2017-08-15" >
-          08-15
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-    
-  </div>
+	    
+	      
 
   
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://z5612365.github.io/about/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://avatars0.githubusercontent.com/u/9198887?v=4&u=b6a6cc256894fc3d4631148039900fc7370481bf&s=400">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ychichiy">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/about/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務（一）/" itemprop="url">nginx-rtmp-module實現mpeg-dash流直播服務（一）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-04T04:00:28+08:00">
+                2017-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/about/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務（一）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務（一）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><span style="color:red">這個系列第一篇就來教如何把本地影片串流到網頁上。</span><br>nginx-rtmp-module是一套NGINX-based Media Streaming Server，不過nginx-rtmp-module不包含media decoder，故需要搭配ffmpeg把目標影片輸出成mpeg-dash流。<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/about/2017/08/04/nginx-rtmp-module實現mpeg-dash流直播服務（一）/#more" rel="contents">
+              閱讀全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+	    
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/about/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/about/">1</a><a class="page-number" href="/about/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
