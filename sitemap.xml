@@ -2,9 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://z5612365.github.io/resume/index.html</loc>
+    
+    <lastmod>2018-04-24T00:15:07.641Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://z5612365.github.io/2018/04/24/Chia-Chi-Lin-%E6%9E%97%E5%AE%B6%E9%BD%8A-%E4%BA%BA%E7%89%A9%E7%B4%80%E9%8C%84/</loc>
+    
+    <lastmod>2018-04-23T19:31:01.248Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://z5612365.github.io/2018/04/24/Chih-Ming-Chang-%E5%BC%B5%E5%BF%97%E6%98%8E-%E4%BA%BA%E7%89%A9%E7%B4%80%E9%8C%84/</loc>
+    
+    <lastmod>2018-04-23T18:48:53.384Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://z5612365.github.io/2018/01/31/MAYA-extrude-tube-along-CV-curve/</loc>
+    
+    <lastmod>2018-01-31T11:28:14.923Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://z5612365.github.io/2017/08/15/%E7%89%B9%E6%95%88%E7%94%A2%E6%A5%AD-Pipeline-TD/</loc>
+    
+    <lastmod>2018-01-26T10:30:02.202Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://z5612365.github.io/about/index.html</loc>
     
-    <lastmod>2018-01-05T07:54:30.635Z</lastmod>
+    <lastmod>2018-01-14T19:31:18.603Z</lastmod>
     
   </url>
   
@@ -117,13 +152,6 @@
     <loc>http://z5612365.github.io/2017/08/14/Python-control-Maya-Layer-Editor/</loc>
     
     <lastmod>2017-08-18T16:25:40.622Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://z5612365.github.io/2017/08/15/%E7%89%B9%E6%95%88%E7%94%A2%E6%A5%AD-Pipeline-TD/</loc>
-    
-    <lastmod>2017-08-18T12:10:37.415Z</lastmod>
     
   </url>
   
