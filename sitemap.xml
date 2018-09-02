@@ -2,189 +2,210 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://z5612365.github.io/resume/index.html</loc>
+    <loc>http://blog.mattc.art/2018/07/28/%E5%A4%A7%E5%85%B5%E6%97%A5%E8%A8%98-%E9%AB%98%E9%9B%84%E9%B3%B3%E5%B1%B1%E9%99%B8%E8%BB%8D%E6%AD%A5%E6%A0%A1%E9%87%91%E6%B9%AF%E7%87%9F%E5%8D%80%E5%8F%83%E8%A8%AA/</loc>
+    
+    <lastmod>2018-07-28T09:01:44.361Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mattc.art/2018/07/21/%E5%A4%A7%E5%85%B5%E6%97%A5%E8%A8%98-%E6%87%87%E8%A6%AA%E6%97%A5/</loc>
+    
+    <lastmod>2018-07-28T09:01:38.481Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mattc.art/2018/04/24/JC-Lin-%E6%9E%97%E6%8C%AF%E5%AE%87-%E4%BA%BA%E7%89%A9%E7%B4%80%E9%8C%84/</loc>
+    
+    <lastmod>2018-04-25T00:11:00.240Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mattc.art/about/index.html</loc>
+    
+    <lastmod>2018-04-24T19:41:25.540Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.mattc.art/resume/index.html</loc>
     
     <lastmod>2018-04-24T01:52:06.847Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/about/index.html</loc>
-    
-    <lastmod>2018-04-24T01:49:56.482Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://z5612365.github.io/tags/index.html</loc>
+    <loc>http://blog.mattc.art/tags/index.html</loc>
     
     <lastmod>2018-04-24T01:17:11.218Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/10/08/Ball-Rig/</loc>
+    <loc>http://blog.mattc.art/2017/10/08/Ball-Rig/</loc>
     
     <lastmod>2018-04-24T01:16:33.730Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2018/04/24/Chia-Chi-Lin-%E6%9E%97%E5%AE%B6%E9%BD%8A-%E4%BA%BA%E7%89%A9%E7%B4%80%E9%8C%84/</loc>
+    <loc>http://blog.mattc.art/2018/04/24/Chia-Chi-Lin-%E6%9E%97%E5%AE%B6%E9%BD%8A-%E4%BA%BA%E7%89%A9%E7%B4%80%E9%8C%84/</loc>
     
     <lastmod>2018-04-23T19:31:01.248Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2018/04/24/Chih-Ming-Chang-%E5%BC%B5%E5%BF%97%E6%98%8E-%E4%BA%BA%E7%89%A9%E7%B4%80%E9%8C%84/</loc>
+    <loc>http://blog.mattc.art/2018/04/24/Chih-Ming-Chang-%E5%BC%B5%E5%BF%97%E6%98%8E-%E4%BA%BA%E7%89%A9%E7%B4%80%E9%8C%84/</loc>
     
     <lastmod>2018-04-23T18:48:53.384Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2018/01/31/MAYA-extrude-tube-along-CV-curve/</loc>
+    <loc>http://blog.mattc.art/2018/01/31/MAYA-extrude-tube-along-CV-curve/</loc>
     
     <lastmod>2018-01-31T11:28:14.923Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/15/%E7%89%B9%E6%95%88%E7%94%A2%E6%A5%AD-Pipeline-TD/</loc>
+    <loc>http://blog.mattc.art/2017/08/15/%E7%89%B9%E6%95%88%E7%94%A2%E6%A5%AD-Pipeline-TD/</loc>
     
     <lastmod>2018-01-26T10:30:02.202Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/10/08/Ball-Rig-2/</loc>
+    <loc>http://blog.mattc.art/2017/10/08/Ball-Rig-2/</loc>
     
     <lastmod>2017-10-13T04:25:39.892Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/09/10/Maya-Event/</loc>
+    <loc>http://blog.mattc.art/2017/09/10/Maya-Event/</loc>
     
     <lastmod>2017-10-07T19:06:34.670Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/10/08/Build-tree-2-xform-cmd-window/</loc>
+    <loc>http://blog.mattc.art/2017/10/08/Build-tree-2-xform-cmd-window/</loc>
     
     <lastmod>2017-10-07T19:06:26.034Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/04/nginx-rtmp-module%E5%AF%A6%E7%8F%BEmpeg-dash%E6%B5%81%E7%9B%B4%E6%92%AD%E6%9C%8D%E5%8B%99%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    <loc>http://blog.mattc.art/2017/08/04/nginx-rtmp-module%E5%AF%A6%E7%8F%BEmpeg-dash%E6%B5%81%E7%9B%B4%E6%92%AD%E6%9C%8D%E5%8B%99%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
     
     <lastmod>2017-09-18T18:51:20.729Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/26/Maya-Python-API-Tutorial%EF%BC%88%E4%B8%83%EF%BC%89/</loc>
+    <loc>http://blog.mattc.art/2017/08/26/Maya-Python-API-Tutorial%EF%BC%88%E4%B8%83%EF%BC%89/</loc>
     
     <lastmod>2017-08-29T17:49:02.179Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/28/Execute-Maya-script-without-lauching-Maya/</loc>
+    <loc>http://blog.mattc.art/2017/08/28/Execute-Maya-script-without-lauching-Maya/</loc>
     
     <lastmod>2017-08-28T00:00:36.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/16/Build-Maya-plugin-with-PySide2%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    <loc>http://blog.mattc.art/2017/08/16/Build-Maya-plugin-with-PySide2%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
     
     <lastmod>2017-08-27T19:40:14.816Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/27/Pycharm-IDE-Auto-Complete%E5%8F%96%E4%BB%A3Maya%E5%8E%9F%E7%94%9FEditor/</loc>
+    <loc>http://blog.mattc.art/2017/08/27/Pycharm-IDE-Auto-Complete%E5%8F%96%E4%BB%A3Maya%E5%8E%9F%E7%94%9FEditor/</loc>
     
     <lastmod>2017-08-27T19:31:48.739Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/25/Maya-Python-API-Tutorial%EF%BC%88%E5%85%AD%EF%BC%89/</loc>
+    <loc>http://blog.mattc.art/2017/08/25/Maya-Python-API-Tutorial%EF%BC%88%E5%85%AD%EF%BC%89/</loc>
     
     <lastmod>2017-08-25T18:03:26.982Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/24/Maya-Python-API-Tutorial%EF%BC%88%E4%BA%94%EF%BC%89/</loc>
+    <loc>http://blog.mattc.art/2017/08/24/Maya-Python-API-Tutorial%EF%BC%88%E4%BA%94%EF%BC%89/</loc>
     
     <lastmod>2017-08-25T17:11:16.476Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/22/Maya-Python-API-Tutorial%EF%BC%88%E5%9B%9B%EF%BC%89/</loc>
+    <loc>http://blog.mattc.art/2017/08/22/Maya-Python-API-Tutorial%EF%BC%88%E5%9B%9B%EF%BC%89/</loc>
     
     <lastmod>2017-08-23T19:54:47.358Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
+    <loc>http://blog.mattc.art/2017/08/21/Maya-Python-API-Tutorial%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
     
     <lastmod>2017-08-23T18:12:13.300Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
+    <loc>http://blog.mattc.art/2017/08/21/Maya-Python-API-Tutorial%EF%BC%88%E4%BA%8C%EF%BC%89/</loc>
     
     <lastmod>2017-08-23T18:12:08.319Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/21/Maya-Python-API-Tutorial%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    <loc>http://blog.mattc.art/2017/08/21/Maya-Python-API-Tutorial%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
     
     <lastmod>2017-08-23T18:11:58.723Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/14/Python-control-Maya-Layer-Editor/</loc>
+    <loc>http://blog.mattc.art/2017/08/14/Python-control-Maya-Layer-Editor/</loc>
     
     <lastmod>2017-08-18T16:25:40.622Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/17/What-is-Render-Farm/</loc>
+    <loc>http://blog.mattc.art/2017/08/17/What-is-Render-Farm/</loc>
     
     <lastmod>2017-08-18T08:08:57.141Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/16/PyQT-vs-PySide/</loc>
+    <loc>http://blog.mattc.art/2017/08/16/PyQT-vs-PySide/</loc>
     
     <lastmod>2017-08-16T17:17:55.499Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/14/install-PyQT-for-Maya-on-Ubuntu/</loc>
+    <loc>http://blog.mattc.art/2017/08/14/install-PyQT-for-Maya-on-Ubuntu/</loc>
     
     <lastmod>2017-08-16T17:17:41.940Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://z5612365.github.io/2017/08/07/Firebase%E9%96%8B%E7%99%BC%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
+    <loc>http://blog.mattc.art/2017/08/07/Firebase%E9%96%8B%E7%99%BC%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
     
     <lastmod>2017-08-09T17:04:14.355Z</lastmod>
     
